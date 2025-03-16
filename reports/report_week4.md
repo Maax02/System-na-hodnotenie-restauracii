@@ -8,32 +8,30 @@
 - Obdobie: 4. týždeň, 17.3. - 23.3.2025 
 
 # Plán:
-oprava špecifikácie
-nainštalovanie potrebných aplikácii
-príprava vývojového prostredia
+-Oprava špecifikácie
+-Nainštalovanie potrebných aplikácii
+-Príprava vývojového prostredia
 
 # Vykonaná práca:
-oprava špecifikácie
-nainštalovanie aplikácií
-rozbehanie vývojového prostredia
-začatie implementovanie front-endu
+- Oprava špecifikácie (6e5596b2501ee63251f8fa375917df3b7095b921)
+- Nainštalovanie aplikácií (no commit)
+- Rozbehanie vývojového prostredia (2ac854a034d3be4ebba518851d07f384ac08a8d5)
+- Začatie implementovanie front-endu (288a9f7a4b2bc8ab20349051d82c163fbdeecce9)
 
 # Zdôvodnenie rozdielov medzi plánom a vykonanou prácou:
 
 
 # Plán na ďalší týždeň:
-Naučiť sa HTML.
-Naučiť sa react
-Vytvoriť polia pre registráciu a prihlásenie užívateľa.
-Dorobiť hlavnú stránku.
+- Vytvoriť polia pre registráciu a prihlásenie užívateľa.
+- Dorobiť hlavnú stránku.
 
 
 # Problémy:
-neišlo mi spustiť npm (vyriešené)
+- Nešlo mi spustiť npm (vyriešené)
 
 # Zmeny v špecifikácii:
-Upravenie Use case diagramu.
-Spomenutie Log In Log out v use case sekcii
-Upravenei data modelu.
+- Upravenie Use case diagramu.
+- Spomenutie Log In Log out v use case sekcii
+- Upravenei data modelu.
  
 
