@@ -1,0 +1,12 @@
+/components/header
+/components/searchBar
+
+-> presunute do NavBar
+-> funkcionalita presunuta do /pages/home a /pages/search
+
+asi ich potom vymazat
+
+Treba Log In a Sign Up na dvoch strankach? -> neskor presunut do jednej
+
+Spravit vlastne css
+default je otras
