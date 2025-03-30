@@ -3,7 +3,7 @@ import '/src/css/signUp.css'
 
 function SignUp() {
     return (
-        <div className="signUp">
+        <div className="signLog">
             <div className="header">
                 <div className="text"> Sign up </div>
                 <div className="underline"></div>
@@ -19,7 +19,9 @@ function SignUp() {
                     <input type="password" placeholder='Password'/>
                 </div>
             </div>
-            <div className="submit"> Sign Up</div>
+            <div className="submits">
+                <div className="submit"> Sign Up </div>
+            </div>
         </div>
     )
 }

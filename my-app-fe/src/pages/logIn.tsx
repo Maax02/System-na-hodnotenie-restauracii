@@ -1,19 +1,21 @@
 function LogIn() {
     return (
-        <div className="LogIn">
+        <div className="signLog">
             <div className="header">
                 <div className="text"> Log In </div>
                 <div className="underline"></div>
             </div>
             <div className="inputs">
                 <div className="input">
-                    <input type="name" />
+                    <input type="name" placeholder='Name'/>
                 </div>
                 <div className="input">
-                    <input type="password" />
+                    <input type="password" placeholder='Password'/>
                 </div>
             </div>
-            <div className="submit"> Log In </div>
+            <div className="submits">
+                <div className="submit"> Log In </div>
+            </div>
         </div>
     )
 }

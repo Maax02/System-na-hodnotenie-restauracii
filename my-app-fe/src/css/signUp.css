@@ -1,4 +1,4 @@
-.signUp{
+.signLog{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -55,4 +55,28 @@
     outline: none;
     color: #797979;
     font-size: 19px;
+}
+
+.submits{
+    display: flex;
+    gap: 30px;
+    margin: 30px auto;
+}
+
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    background: #3582c4;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submit div:hover{
+    color: #ffcc00;
 }
