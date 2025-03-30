@@ -1,7 +1,26 @@
-/* import React from "react" */
+import { useState } from 'react';
 import '/src/css/signUp.css'
 
 function SignUp() {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async () => {
+        const response = await fetch("http://localhost:3000/signUp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert("Registration successful!");
+        } else {
+            alert("Error: " + data.message);
+        }
+    };
+
     return (
         <div className="signLog">
             <div className="header">
@@ -10,17 +29,20 @@ function SignUp() {
             </div>
             <div className="inputs">
                 <div className="input">
-                    <input type="name" placeholder='Name'/>
+                    <input type="name" placeholder='Name'
+                    value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div className="input">
-                    <input type="email" placeholder='Email'/>
+                    <input type="email" placeholder='Email'
+                    value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="input">
-                    <input type="password" placeholder='Password'/>
+                    <input type="password" placeholder='Password'
+                    value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
             </div>
             <div className="submits">
-                <div className="submit"> Sign Up </div>
+                <div className="submit" onClick={handleSubmit}> Sign Up </div>
             </div>
         </div>
     )
