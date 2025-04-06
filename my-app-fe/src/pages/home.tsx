@@ -1,5 +1,9 @@
+import RestaurantCard from "../components/restaurantCard"
+
 function Home() {
-    return <h1> Vitajte na hlavnej stranke </h1>
+    return (
+        <RestaurantCard />
+    )
 }
 
-export default Home
+export default Home 
