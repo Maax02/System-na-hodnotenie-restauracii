@@ -1,5 +1,6 @@
 import './App.css'
 import NavBar from './components/navBar';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 /* pages */
 import Home from './pages/home';
@@ -8,28 +9,17 @@ import LogIn from './pages/logIn';
 import Search from './pages/search';
 
 
-function App({ children }: any) {
-  let page
-  switch (window.location.pathname) {
-    case "/":
-      page = <Home />
-      break
-    case "/signUp":
-      page = <SignUp />
-      break
-    case "/logIn":
-      page = <LogIn />
-      break
-    case "/search":
-      page = <Search />
-  }
-
+function App({}: any) {
   return (
-    <>
+    <Router>
       <NavBar></NavBar>
-      {page}
-      <div>{children}</div>
-    </>
+      <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/logIn" element={<LogIn />} />
+      <Route path="/search" element={<Search />} />
+    </Routes>
+    </Router>
   );
 }
 
