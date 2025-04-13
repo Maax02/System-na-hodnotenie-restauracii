@@ -4,7 +4,7 @@
 - Link na repozitár: https://github.com/Maax02/System-na-hodnotenie-restauracii
 
 # Info o reportovanej verzii:  
-- Tag: week7
+- Tag: week8
 - Obdobie: 8. týždeň, 7.4. - 13.4.2025 
 
 # Plán:
