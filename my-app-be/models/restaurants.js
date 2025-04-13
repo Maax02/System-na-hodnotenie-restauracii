@@ -22,3 +22,10 @@ exports.getRestaurantById = function (id) {
         [id]
     );
 };
+
+exports.addRestaurant = function(restaurant_name, kuchyna, street, street_number, city, psc) {
+    return pool.query(
+        `insert into restaurant (restaurant_name, kuchyna, street, street_number, city, psc)
+        values ($1, $2, $3, $4, $5, $6)`,
+        [restaurant_name, kuchyna, street, street_number, city, psc]);
+}
