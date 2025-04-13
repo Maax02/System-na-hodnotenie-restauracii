@@ -2,16 +2,16 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Restaurant } from '../types'; // extend your types if needed
 import { getRestaurantById } from '../services/restaurantService'
+import '/src/css/restaurantPage.css'
 
 function RestaurantPage() {
     const { id } = useParams<{ id: string }>();
     const restaurantId = id?.split('_')[0];
-    const [restaurant, setRestaurant] = useState<Restaurant>();
+    const [restaurant, setRestaurant] = useState<Restaurant[]>();
     const [loading, setLoading] = useState(true);
 
   // periodically refresh (timer)
     if(restaurantId) {
-        console.log("YOOOO", restaurantId);
         useEffect(() => {
         getRestaurantById(restaurantId).then(
             (restaurant) => setRestaurant(restaurant)
@@ -28,15 +28,17 @@ function RestaurantPage() {
         }, [restaurantId]);
     }
 
-    console.log("restaurant query", restaurant);
-    console.log("restaurant name", restaurant?.restaurant_name);
     if (loading) return <p> Loading ... </p>;
     if (!restaurant) return <p>Restaurant not found.</p>;
 
+    console.log(`src/images/${restaurant[0].restaurant_id}.png`)
     return (
-    <div>
-        <h1>{restaurant.restaurant_name}</h1>
-        <p>Kitchen: {restaurant.kuchyna}</p>
+    <div className='restaurant-page-card'>
+        <h1 className='restaurant-page-name'> {restaurant[0].restaurant_name} </h1>
+        <p className='restaurant-page-kitchen'> Kuchyna: {restaurant[0].kuchyna} </p>
+        <p className='restaurant-page-rating'> Rating: ⭐ treba spravit query /10 </p>
+        <p className='restaurant-page-address'> Adresa: {restaurant[0].street} {restaurant[0].street_number}, {restaurant[0].city}, {restaurant[0].psc} </p>
+        <img src={`/images/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />
     </div>
 
     );
