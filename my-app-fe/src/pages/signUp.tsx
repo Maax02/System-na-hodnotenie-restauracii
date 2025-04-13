@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import '/src/css/signUp.css'
+import { addUser } from '../services/signUpService'
 
 function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async () => {
-        const response = await fetch("/auth/signUp", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, email, password }),
+    function signUp() {
+        addUser({
+            'user_name': username,
+            'user_password': password,
+            'user_email': email
         });
 
-        const data = await response.json();
-        if (response.ok) {
-            alert("Registration successful!");
-        } else {
-            alert("Error: " + data.message);
-        }
-    };
+        setUsername('');
+        setEmail('');
+        setPassword('');
+    }
 
     return (
         <div className="signLog">
@@ -42,10 +40,10 @@ function SignUp() {
                 </div>
             </div>
             <div className="submits">
-                <div className="submit" onClick={handleSubmit}> Sign Up </div>
+                <div className="submit" onClick={signUp}> Sign Up </div>
             </div>
         </div>
     )
 }
 
-export default SignUp
+export default SignUp;

@@ -10,11 +10,11 @@ const pool = new Pool({
     database: process.env.DB_NAME
 });
 
-exports.addUser = function(user_name, user_email, user_password) {
+exports.addUser = function(user) {
     return pool.query(
         `insert into users (user_name, user_password, email, isAdmin)
         values ($1, $2, $3, $4)`
-        , [user_name, user_email, user_password, false]);
+        , [user.user_name, user.user_email, user.user_password, false]);
 };
 
 exports.addAdmin = function(user_name, user_email, user_password) {

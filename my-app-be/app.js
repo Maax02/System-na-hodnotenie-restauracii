@@ -35,6 +35,8 @@ var usersRouter = require('./routes/users');
 var restaurantsRouter = require('./routes/api_v1/restaurants');
 var restaurantByIdRouter = require('./routes/api_v1/restaurants');
 
+var addUserRouter = require('./routes/api_v1/users');
+
 var app = express();
 
 // various middlewares
@@ -53,5 +55,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/v1/restaurants', restaurantsRouter);
 app.use('/api/v1/restaurants/:id', restaurantByIdRouter);
+app.use('/api/v1/users', addUserRouter);
 
 module.exports = app;
