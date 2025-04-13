@@ -4,7 +4,7 @@ CREATE TYPE kitchen_type AS ENUM ('Slovenská', 'Talianská', 'Mexická', 'Azijs
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
     user_name VARCHAR(50) NOT NULL,
-    user_password VARCHAR(20) NOT NULL,
+    user_password VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     isAdmin BOOLEAN
 );
