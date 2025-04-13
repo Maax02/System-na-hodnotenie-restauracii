@@ -3,9 +3,9 @@ CREATE TYPE kitchen_type AS ENUM ('Slovenská', 'Talianská', 'Mexická', 'Azijs
 
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
-    user_firstName VARCHAR(20) NOT NULL,
-    user_lastName VARCHAR(20) NOT NULL,
-    user_email VARCHAR(50) UNIQUE NOT NULL,
+    user_name VARCHAR(50) NOT NULL,
+    user_password VARCHAR(20) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
     isAdmin BOOLEAN
 );
 
@@ -41,7 +41,8 @@ VALUES
 ('Šestka', 'Novohradská', 6, 'Bratislava', 82109, 'Mixed'),
 ('Koliba Kamzik Zelená', 'Zelená', 5, 'Bratislava', 81101, 'Mixed'),
 ('Modrá Hviezda', 'Beblavého', 14, 'Bratislava', 81101, 'Slovenská'),
-('Gatto Matto', 'Panská', 17, 'Bratislava', 81101, 'Talianská');
+('Gatto Matto', 'Panská', 17, 'Bratislava', 81101, 'Talianská'),
+values ('MumBhai Central', 'Miletičova', 592, 'Bratislava', 82109, 'Indická');
 
 
 INSERT INTO users (user_firstName, user_lastName, user_email, isAdmin)
