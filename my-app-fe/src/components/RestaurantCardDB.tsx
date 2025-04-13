@@ -11,10 +11,9 @@ function RestaurantCardDB({ restaurants }: Props) {
         <div className="cardPlace">
             {restaurants.map((restaurant) => (
                 <div className="cardSpace">
-                    <p className="cardId"> {restaurant.restaurant_id}</p>
+                    <img src={`src/images/${restaurant.restaurant_id}.png`} alt="rest-0" className="cardImage" />
                     <h2 className="cardName">{restaurant.restaurant_name}</h2>
                     <p className="cardKitchen"> {restaurant.kuchyna} </p>
-                    
                     <Link to={`/restaurants/${restaurant.restaurant_id}_${encodeURIComponent(
                     restaurant.restaurant_name
                     )}`} className="cardLink"> Viac informacii </Link>
