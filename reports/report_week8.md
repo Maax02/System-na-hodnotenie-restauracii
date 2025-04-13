@@ -16,7 +16,7 @@
 # Vykonaná práca:
 - restauracie cerpam z databazy
 - signUp page funguje -> pridava usera do db
-- vytvorena stranka pre kazdy restauraciu (chybaju review)
+- vytvorena stranka pre kazdu restauraciu (chybaju review)
 - zmena struktury tabulky users (chybalo tam heslo pre usera)
 
 # Zdôvodnenie rozdielov medzi plánom a vykonanou prácou:
@@ -31,4 +31,4 @@
 - na to treba este spravit logIn uzivatela
 
 # Problémy:
-- malo backend + routing
+- backend + routing
