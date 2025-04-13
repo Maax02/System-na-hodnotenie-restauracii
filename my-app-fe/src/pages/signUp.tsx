@@ -7,7 +7,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
-        const response = await fetch("http://localhost:3000/signUp", {
+        const response = await fetch("/auth/signUp", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password }),
