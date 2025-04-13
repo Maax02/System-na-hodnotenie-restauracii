@@ -1,0 +1,32 @@
+.restaurant-page-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+}
+
+.restaurant-page-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.restaurant-page-kitchen,
+.restaurant-page-rating,
+.restaurant-page-address {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.restaurant-page-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}
