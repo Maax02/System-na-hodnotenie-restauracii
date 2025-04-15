@@ -10,23 +10,11 @@ const pool = new Pool({
     database: process.env.DB_NAME
 });
 
-exports.addReview = function(user_id, restaurant_id, hodnotenie, sprava, datum) {
+exports.getRestaurantReviews = function(id) {
     return pool.query(
-        `insert into recenzia (user_id, restaurant_id, hodnotenie, sprava, datum)
-        values ($1, $2, $3, $4, $5)`,
-        [user_id, restaurant_id, hodnotenie, sprava, datum]);
-};
-
-exports.getReview = function(user_name, user_email, user_password) {
-    return pool.query(
-        `insert into users (user_firstName, user_lastName, user_email, isAdmin)
-        values ($1, $2, $3, $4)`,
-        [user_name, user_email, user_password, true]);
-};
-
-exports.deleteReview = function (id) {
-    return pool.query(
-        `delete from recenzia where recenzia_id = $1`,
-        [id]
-    );
+        `select r.recenzia_id, r.restaurant_id, r.user_id, r.hodnotenie, r.sprava, r.datum, u.user_name, u.email
+        from recenzia r
+        join users as u on r.user_id = u.user_id
+        where restaurant_id = $1`,
+        [id]);
 };
