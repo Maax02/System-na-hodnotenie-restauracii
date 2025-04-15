@@ -10,6 +10,7 @@ const pool = new Pool({
     database: process.env.DB_NAME
 });
 
+
 exports.getRestaurantReviews = function(id) {
     return pool.query(
         `select r.recenzia_id, r.restaurant_id, r.user_id, r.hodnotenie, r.sprava, r.datum, u.user_name, u.email
@@ -18,3 +19,35 @@ exports.getRestaurantReviews = function(id) {
         where restaurant_id = $1`,
         [id]);
 };
+
+/*
+exports.getRestaurantReviews = function(id) {
+    return pool.query(
+        `select r.recenzia_id, r.restaurant_id, r.user_id, r.hodnotenie, r.sprava, r.datum, u.user_name, u.email, avg.avg_rating
+        from recenzia r
+        join users u ON r.user_id = u.user_id
+        join (
+        select restaurant_id, AVG(hodnotenie) AS average_rating
+        from recenzia
+        where restaurant_id = $1
+        group by restaurant_id)
+        avg on r.restaurant_id = avg.restaurant_id
+        where r.restaurant_id = $1`,
+        [id]);
+};*/
+
+exports.getRestaurantAvg = function(id) {
+    return pool.query(
+        `SELECT AVG(hodnotenie) AS average_rating
+        FROM recenzia
+        WHERE restaurant_id = $1`,
+        [id]);
+};
+
+
+
+
+
+
+
+
