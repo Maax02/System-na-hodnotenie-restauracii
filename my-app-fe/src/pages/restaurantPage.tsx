@@ -12,7 +12,6 @@ function RestaurantPage() {
     const { id } = useParams<{ id: string }>();
     const restaurantId = id?.split('_')[0];
     const [reviews, setReview] = useState<RestaurantReview[]>();
-    const [averageRating, setAverageRating] = useState<number>(0);
     const [loading, setLoading] = useState(true);
 
   // periodically refresh (timer)
