@@ -32,13 +32,13 @@ function RestaurantPageCard() {
     if (loading) return <p> Loading ... </p>;
     if (!restaurant) return <p>Restaurant not found.</p>;
 
-    console.log(`src/images/${restaurant[0].restaurant_id}.png`)
+    console.log(restaurant[0])
     return (
     <div className='restaurant-page-card'>
         <img src={`/images/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />
         <h1 className='restaurant-page-name'> {restaurant[0].restaurant_name} </h1>
         <p className='restaurant-page-kitchen'> Kuchyna: {restaurant[0].kuchyna} </p>
-        <p className='restaurant-page-rating'> Rating: ⭐ treba dorobit /10 </p>
+        <p className='restaurant-page-rating'> Rating: ⭐ {restaurant[0].average_rating} /10 </p>
         <p className='restaurant-page-address'> Adresa: {restaurant[0].street} {restaurant[0].street_number}, {restaurant[0].city}, {restaurant[0].psc} </p>
         
     </div>
