@@ -7,6 +7,7 @@ import Home from './pages/home';
 import SignUp from './pages/signUp';
 import LogIn from './pages/logIn';
 import Search from './pages/search';
+import Account from './pages/account';
 
 import { useEffect, useState } from 'react';
 import { getRestaurant } from './services/restaurantService'
@@ -35,7 +36,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/restaurants" element={<RestaurantListPage restaurants={restaurants}/>} />
+        <Route path="/restaurants/" element={<RestaurantListPage restaurants={restaurants}/>} />
+        <Route path="/account" element={<Account />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/logIn" element={<LogIn />} />
         <Route path="/search" element={<Search />} />
