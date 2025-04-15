@@ -1,6 +1,7 @@
 const {Pool} = require('pg');
 const {config} = require('../config.secrets')
 require('dotenv').config();
+var bcrypt = require('bcryptjs');
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -11,10 +12,11 @@ const pool = new Pool({
 });
 
 exports.addUser = function(user) {
+    pswd = bcrypt.hashSync(user.user_password);
     return pool.query(
         `insert into users (user_name, user_password, email, isAdmin)
         values ($1, $2, $3, $4)`
-        , [user.user_name, user.user_email, user.user_password, false]);
+        , [user.user_name, pswd, user.user_email, false]);
 };
 
 exports.addAdmin = function(user_name, user_email, user_password) {
