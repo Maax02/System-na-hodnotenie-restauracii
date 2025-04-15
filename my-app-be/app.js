@@ -32,10 +32,13 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 var restaurantsRouter = require('./routes/api_v1/restaurants');
 var restaurantByIdRouter = require('./routes/api_v1/restaurants');
 
 var addUserRouter = require('./routes/api_v1/users');
+
+var reviewByRestaurantId = require('./routes/api_v1/reviews');
 
 var app = express();
 
@@ -55,6 +58,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/v1/restaurants', restaurantsRouter);
 app.use('/api/v1/restaurants/:id', restaurantByIdRouter);
+
 app.use('/api/v1/users', addUserRouter);
+
+app.use('/api/v1/reviews/', reviewByRestaurantId);
 
 module.exports = app;
