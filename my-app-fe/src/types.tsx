@@ -6,6 +6,7 @@ export interface Restaurant {
     city: string;
     psc: number;
     kuchyna: string;
+    average_rating: number;
   }
 
   export interface User {
@@ -24,9 +25,5 @@ export interface RestaurantReview {
   sprava: string;
   datum: Date;
   user_name: string;
-}
-
-export interface RestaurantReviewResponse {
-  reviews: RestaurantReview[];
-  average_rating: number | null;
+  average_rating : number;
 }
