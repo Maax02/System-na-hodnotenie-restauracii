@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
     ).catch(
         (err) => {
             console.log(err);
-            res.status(500);
+            res.status(500).send("Error fetching restaurants");
         }
     );
 });
@@ -24,7 +24,7 @@ router.get('/:id', function (req, res, next) {
     ).catch(
         (err) => {
             console.log(err);
-            res.status(500);
+            res.status(500).send("Error fetching restaurant by id");
         }
     );
 });
