@@ -4,9 +4,10 @@ import { Restaurant } from '../types';
 
 interface Props {
     restaurants: Restaurant[];
+    search: string
 }
 
-function RestaurantListPage( { restaurants }: Props ) {
+function RestaurantListPage( { restaurants, search }: Props) {
     /*const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   
     useEffect(() => {
@@ -15,8 +16,8 @@ function RestaurantListPage( { restaurants }: Props ) {
         .then((data: Restaurant[]) => setRestaurants(data))
         .catch((err) => console.error('Error fetching restaurants:', err));
     }, []);*/
-  
-    return <RestaurantCardDB restaurants={restaurants} />;
+    console.log("RestaurantListPage search:", search);
+    return <RestaurantCardDB restaurants={restaurants} search={search} />;
   }
   
   export default RestaurantListPage;

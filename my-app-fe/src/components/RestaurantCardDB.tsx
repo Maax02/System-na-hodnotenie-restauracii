@@ -4,12 +4,20 @@ import { Restaurant } from '../types';
 
 interface Props {
     restaurants: Restaurant[];
+    search: string
 }
 
-function RestaurantCardDB({ restaurants }: Props) {
+function RestaurantCardDB({ restaurants, search }: Props) {
+
+    console.log("Card search: ", search)
     return (
         <div className="cardPlace">
-            {restaurants.map((restaurant) => (
+            {restaurants.filter((restaurant) => {
+                const searchText = search?.toLowerCase() || '';
+                return searchText === ''
+                    ? restaurant
+                    : restaurant.restaurant_name.toLowerCase().includes(searchText);
+            }).map((restaurant) => (
                 <div className="cardSpace" key={restaurant.restaurant_id}>
                     <img src={`/images/${restaurant.restaurant_id}.png`} alt="rest-0" className="cardImage" />
                     <h2 className="cardName">{restaurant.restaurant_name}</h2>

@@ -8,6 +8,7 @@ import SignUp from './pages/signUp';
 import LogIn from './pages/logIn';
 import Search from './pages/search';
 import Account from './pages/account';
+import { Navigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { getRestaurant } from './services/restaurantService'
@@ -15,7 +16,9 @@ import { Restaurant } from './types';
 
 function App() {
 
-  const [restaurants, setRestaurant] = useState<Restaurant[]>([]);  
+  const [restaurants, setRestaurant] = useState<Restaurant[]>([]);
+  const [search, setSearch] = useState<string>('') 
+  console.log(search) 
 
   // periodically refresh (timer)
   useEffect(() => {
@@ -34,9 +37,18 @@ function App() {
   return (
     <Router>
       <NavBar />
+      <div className='search'>
+        <form className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Zadajte reštauráciu..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </form>
+      </div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/restaurants/" element={<RestaurantListPage restaurants={restaurants}/>} />
+        <Route path="/" element={<Navigate to="/restaurants" />} />
+        <Route path="/restaurants/" element={<RestaurantListPage restaurants={restaurants} search={search}/>} />
         <Route path="/account" element={<Account />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/logIn" element={<LogIn />} />
