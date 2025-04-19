@@ -1,7 +1,8 @@
-const {Pool} = require('pg');
+const pool = require('../config/db');
 const {config} = require('../config.secrets')
 require('dotenv').config();
 
+/*
 const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -9,6 +10,7 @@ const pool = new Pool({
     port: process.env.DB_PORT,
     database: process.env.DB_NAME
 });
+*/
 
 exports.getRestaurants = function() {
     //return pool.query(`select restaurant_id, restaurant_name, kuchyna from restaurant`);
