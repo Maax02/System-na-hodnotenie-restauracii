@@ -30,5 +30,20 @@ function getUserReviews(id: string) {
         });
 }
 
+function addReview(userId: number, restaurantId: string, rating: number, message: string) {
+    return fetch("/api/v1/reviews", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            restaurant_id: restaurantId,
+            hodnotenie: rating,
+            sprava: message,
+        })
+    });
+}
 
-export { getRestaurantReviews, getUserReviews };
+
+export { getRestaurantReviews, getUserReviews, addReview };

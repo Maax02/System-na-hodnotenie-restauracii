@@ -55,3 +55,10 @@ exports.getUserReviews = function(id) {
         where r.user_id = $1`,
         [id]);
 };
+
+exports.addReview = function(user_id, restaurant_id, hodnotenie, sprava) {
+    return pool.query(
+        `insert into recenzia (user_id, restaurant_id, hodnotenie, sprava, datum)
+        values ($1, $2, $3, $4, NOW())`
+        , [user_id, restaurant_id, hodnotenie, sprava]);
+};

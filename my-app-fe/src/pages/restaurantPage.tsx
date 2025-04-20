@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { RestaurantReview } from "../types"
 import { useEffect, useState } from 'react';
 import { getRestaurantReviews } from '../services/reviewService'
+import AddRestaurantReview from '../components/addRestaurantReview'
 
 
 
@@ -40,6 +41,7 @@ function RestaurantPage() {
         <>
             <RestaurantPageCard/>
             <ReviewCard reviews={reviews || []}/>
+            <AddRestaurantReview restaurantId={restaurantId!}/>
         </>
     );
 }
