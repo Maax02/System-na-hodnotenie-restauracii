@@ -18,4 +18,30 @@ function login(username: string, password: string) {
       })
 }
 
-export { login };
+async function fetchUserInfo() {
+  const res = await fetch('/api/v1/auth/me', {
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error('Not logged in');
+  }
+
+  return await res.json();
+}
+
+
+function logout() {
+  return fetch("/api/v1/auth/logout", {method: "DELETE", credentials: "include"})
+    .then((response) => {  // promise is resolved
+      if (!response.ok) {
+        if (response.status === 400) {
+          throw new Error("Bad request - session does not exist"); 
+        }
+        throw new Error("Error logging out");
+      }      
+    })
+    
+}
+
+export { login, fetchUserInfo, logout };
