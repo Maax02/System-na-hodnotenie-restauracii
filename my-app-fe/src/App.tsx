@@ -8,10 +8,7 @@ import LogIn from './pages/logIn';
 import Search from './pages/search';
 import Account from './pages/account';
 import { Navigate } from 'react-router-dom';
-
-import { useEffect, useState } from 'react';
-import { getRestaurant } from './services/restaurantService';
-import { Restaurant } from './types';
+import { useState } from 'react';
 
 
 function App() {
