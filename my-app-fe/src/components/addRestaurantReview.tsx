@@ -1,36 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addReview } from "../services/reviewService";
 import { fetchUserId } from "../services/logInService";
+import '/src/css/addReview.css';
 
 interface Props {
-    restaurantId: string;
+  restaurantId: string;
 }
 
-function AddRestaurantReview({ restaurantId} : Props) {
+function AddRestaurantReview({ restaurantId }: Props) {
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(5);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetchUserId()
+      .then((userData) => {
+        if (userData?.userId !== null && userData?.userId !== undefined) {
+          setUserId(userData.userId);
+        }
+      })
+      .catch(() => setUserId(null));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const userData = await fetchUserId();
-      await addReview(userData.userId, restaurantId, rating, message);
+      if (!userId) {
+        setError("Musíte byť prihlásený na pridanie recenzie.");
+        return;
+      }
+      await addReview(userId, restaurantId, rating, message);
       setMessage("");
       setRating(5);
-      //onReviewAdded();
-    } catch (err: any) {
-      setError("Could not submit review. Are you logged in?");
+    } catch {
+      setError("Nepodarilo sa odoslať recenziu.");
     } finally {
       setLoading(false);
     }
   };
 
+  if (!userId) return <p>Pre napisanie recenzie sa musíte prihlásiť.</p>;
+
   return (
     <div className="add-review-form">
-      <h3>Napiste recenziu</h3>
+      <h3>Napíšte recenziu</h3>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>
@@ -42,7 +58,7 @@ function AddRestaurantReview({ restaurantId} : Props) {
           </select>
         </label>
         <label>
-          Sprava:
+          Správa:
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -50,7 +66,7 @@ function AddRestaurantReview({ restaurantId} : Props) {
           />
         </label>
         <button type="submit" disabled={loading}>
-          {loading ? "Submitting..." : "Submit Review"}
+          {loading ? "Odosiela sa..." : "Odoslať"}
         </button>
       </form>
     </div>
