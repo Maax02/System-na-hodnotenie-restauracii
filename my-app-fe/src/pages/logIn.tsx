@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../services/logInService';
+import { login, logout } from '../services/logInService';
 
 interface LogInProps {
   error: string;
@@ -14,7 +14,6 @@ function LogIn({ error, setError, setAuthStatus }: LogInProps) {
   const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false); // 👈 New
   const navigate = useNavigate();
 
-  // 👇 Check login status on load
   useEffect(() => {
     fetch('/api/v1/auth/check', {
       credentials: 'include',
@@ -23,12 +22,23 @@ function LogIn({ error, setError, setAuthStatus }: LogInProps) {
       .then((data) => {
         if (data.loggedIn) {
           setAlreadyLoggedIn(true);
-          setAuthStatus(true); // update global/auth status if needed
-          // Optionally redirect automatically:
-          // navigate('/restaurants');
+          setAuthStatus(true);
+          //navigate('/restaurants');
         }
       });
   }, []);
+
+  function handleLogout() {
+    logout()
+        .then(() => {
+            setAuthStatus(false);
+            navigate('/');
+        })
+        .catch((error) => {
+            console.log(error.message);
+            setError(error.message)
+        });
+}
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -59,18 +69,26 @@ function LogIn({ error, setError, setAuthStatus }: LogInProps) {
     setError('');
   };
 
+  if (alreadyLoggedIn) {
+    return (
+      <>
+    <p className="info-message" style={{ color: 'green', textAlign: 'center' }}>
+      You are already logged in!</p>
+    <button
+        className="btn btn-primary"
+        onClick={handleLogout}>
+        Logout
+    </button>
+    </>
+    );
+  }
+
   return (
     <div className="signLog">
       <div className="header">
         <div className="text">Log In</div>
         <div className="underline"></div>
       </div>
-
-      {alreadyLoggedIn && (
-        <p className="info-message" style={{ color: 'green', textAlign: 'center' }}>
-          You are already logged in.
-        </p>
-      )}
 
       <form className="inputs" onSubmit={handleSubmit}>
         <div className="input">
