@@ -46,9 +46,12 @@ exports.getRestaurantAvg = function(id) {
 };
 
 
-
-
-
-
-
-
+exports.getUserReviews = function(id) {
+    return pool.query(
+        `select r.recenzia_id, r.restaurant_id, res.restaurant_name, r.user_id, r.hodnotenie, r.sprava, r.datum, u.user_name, u.email
+        from recenzia r
+        join users as u on r.user_id = u.user_id
+        join restaurant as res on res.restaurant_id = r.restaurant_id
+        where r.user_id = $1`,
+        [id]);
+};
