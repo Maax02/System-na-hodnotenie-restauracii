@@ -31,17 +31,4 @@ router.get('/:id', function (req, res, next) {
 });
 
 
-router.get('/user/:id', function (req, res, next) {
-    const id = req.params.id;
-    getUserReviews(id).then(
-        (restaurant) => {
-            res.json(restaurant.rows);
-        }
-    ).catch(
-        (err) => {
-            console.log(err);
-            res.status(500).send("Error fetching user reviews by user id");
-        }
-    );
-});
 module.exports = router; // ESM: export

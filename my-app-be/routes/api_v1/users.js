@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { addUser } = require('../../models/users')
+var { addUser, getUserInfo } = require('../../models/users')
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -9,6 +9,21 @@ router.post('/', function (req, res, next) {
         (e) => {
             console.log(e);
             res.status(500);
+        }
+    );
+});
+
+
+router.get('/:id', function (req, res, next) {
+    const id = req.params.id;
+    getUserInfo(id).then(
+        (user) => {
+            res.json(user.rows);
+        }
+    ).catch(
+        (err) => {
+            console.log(err);
+            res.status(500).send("Error fetching user info");
         }
     );
 });

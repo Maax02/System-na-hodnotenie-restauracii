@@ -18,7 +18,7 @@ function login(username: string, password: string) {
       })
 }
 
-async function fetchUserInfo() {
+async function fetchUserId() {
   const res = await fetch('/api/v1/auth/me', {
     credentials: 'include',
   });
@@ -44,4 +44,20 @@ function logout() {
     
 }
 
-export { login, fetchUserInfo, logout };
+function getUserInfo(id: number) {
+  return fetch(`/api/v1/users/${id}`).then(  // promise is resolved
+      (response) => {
+          if (!response.ok) { // HTTP status code NOT between 200-299
+              throw new Error("Error getting userInfo");
+          }
+          return response.json();
+      }).catch((error) => {               // promise is rejected  
+          // Better way would be to throw error here and let the 
+          // client handle (e.g. show error message)
+          // Returning empty array for simplicity only!
+          console.log("Error getting messages", error);
+          return [];
+      });
+}
+
+export { login, fetchUserId, logout, getUserInfo };

@@ -1,52 +1,50 @@
 import { useEffect, useState } from 'react';
-import { fetchUserInfo } from '../services/logInService';
+import { fetchUserId, getUserInfo } from '../services/logInService';
 import { getUserReviews } from '../services/reviewService'; // your service file
 import '/src/css/card.css';
 
 function AccountCard() {
-    const [user, setUser] = useState<any>(null);
+    const [userId, setUserId] = useState<any>(null);
     const [reviews, setReviews] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [user, setUser] = useState<any>(null);
 
     useEffect(() => {
-        fetchUserInfo()
+        fetchUserId()
             .then((userData) => {
-                setUser(userData);
-                return getUserReviews(userData.userId);
+                setUserId(userData);
+                return Promise.all([
+                    getUserInfo(userData.userId),
+                    getUserReviews(userData.userId)
+                ]);
             })
-            .then((userReviews) => {
+            .then(([userInfo, userReviews]) => {
+                setUser(userInfo);
                 setReviews(userReviews);
             })
             .catch(() => {
-                setUser(null);
+                setUserId(null);
                 setError('Please log in to view your account info.');
             });
     }, []);
 
-    if (error) {
-        return (
-            <div className="cardPlace">
-                <div className="cardSpace">
-                    <p>{error}</p>
-                </div>
-            </div>
-        );
-    }
+    console.log("user: ", user)
+    console.log("userId", userId)
 
-    if (!user) {
-        return null; // loading spinner or placeholder
+
+    if (!userId) {
+        return null;
     }
 
     return (
-        <div className="cardPlace">
-            <div className="cardSpace">
-                <h2 className="cardName">{user.username}</h2>
-                <p className="Basic info">Description:</p>
+        <div className="accountPlace">
+            <div className="accountSpace">
+                <h2 className="userName">Name: {user[0].user_name}</h2>
                 <ul>
-                    <li className="email">Email: (add email if you're returning it)</li>
+                    <li className="email">Email: {user[0].email}</li>
                     <li className="review number">Number of reviews: {reviews.length}</li>
                     <li className="user type">
-                        User type: {user.isAdmin ? 'Admin' : 'User'}
+                        User type: {user?.isadmin ? 'Admin' : 'Normal User'}
                     </li>
                 </ul>
 
@@ -55,8 +53,11 @@ function AccountCard() {
                     {reviews.length > 0 ? (
                         <ul>
                             {reviews.map((review) => (
-                                <li key={review.id}>
-                                    {review.restaurant_name}: {review.hodnotenie}★ - "{review.text}"
+                                <li key={review.recenzia_id}>
+                                    {review.restaurant_name} 
+                                    <p>Hodnotenie: ⭐{review.hodnotenie}/10 </p>
+                                    <p>Recenzia: "{review.sprava}" </p>
+                                    <p>Datum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
                                 </li>
                             ))}
                         </ul>

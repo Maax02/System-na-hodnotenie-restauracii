@@ -73,8 +73,6 @@ router.get("/me", (req, res) => {
     if (req.session && req.session.userId) {
         return res.status(200).json({
             userId: req.session.userId,
-            username: req.session.username,
-            isAdmin: req.session.isAdmin
         });
     } else {
         return res.status(401).json({ message: "Not logged in" });
