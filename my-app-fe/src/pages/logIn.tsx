@@ -73,7 +73,7 @@ function LogIn({ error, setError, setAuthStatus }: LogInProps) {
     return (
       <>
     <p className="info-message" style={{ color: 'green', textAlign: 'center' }}>
-      You are already logged in!</p>
+      Už ste prihlásený!</p>
     <button
         className="btn btn-primary"
         onClick={handleLogout}>

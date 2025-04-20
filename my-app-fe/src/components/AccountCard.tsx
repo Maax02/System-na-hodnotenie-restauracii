@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchUserId, getUserInfo } from '../services/logInService';
-import { getUserReviews } from '../services/reviewService'; // your service file
+import { fetchUserId, getUserInfo, logout } from '../services/logInService';
+import { getUserReviews } from '../services/reviewService';
+import { useNavigate } from 'react-router-dom';
 import '/src/css/card.css';
 
 function AccountCard() {
@@ -9,6 +10,8 @@ function AccountCard() {
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchUserId()
@@ -31,16 +34,23 @@ function AccountCard() {
             });
     }, []);
 
-    console.log("user: ", user)
-    console.log("userId", userId)
-
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                navigate('/');
+            })
+            .catch((error) => {
+                console.error("Logout failed:", error);
+                setError("Chyba pri odhlasovaní.");
+            });
+    };
 
     if (loading) {
-        return <p>Loading user info...</p>;
+        return <p>Načítavanie ...</p>;
     }
 
     if (!userId) {
-        return <p> Nie ste prihlaseny </p>;
+        return <p> Nie ste prihlásený </p>;
     }
 
     return (
@@ -51,9 +61,13 @@ function AccountCard() {
                     <li className="email">Email: {user[0].email} </li>
                     <li className="review number">Počet recenzií: {reviews.length}</li>
                     <li className="user type">
-                        Používateľské právomoci: {user?.isadmin ? 'Admin' : 'Normal User'}
+                        Používateľská právomoc: {user?.isadmin ? 'Admin' : 'Normal User'}
                     </li>
                 </ul>
+
+                <button className="logout-btn" onClick={handleLogout}>
+                    Odhlásiť sa
+                </button>
 
                 <div className="user-reviews">
                     <h3>Vaše recenzie:</h3>
@@ -61,9 +75,9 @@ function AccountCard() {
                         <ul>
                             {reviews.map((review) => (
                                 <li key={review.recenzia_id}>
-                                    {review.restaurant_name} 
+                                    Reštaurácia: {review.restaurant_name}
                                     <p>Hodnotenie: ⭐{review.hodnotenie}/10 </p>
-                                    <p>Recenzia: "{review.sprava}" </p>
+                                    <p>Správa: "{review.sprava}" </p>
                                     <p>Dátum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
                                 </li>
                             ))}
