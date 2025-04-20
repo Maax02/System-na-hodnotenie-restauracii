@@ -40,8 +40,8 @@ function RestaurantPage() {
     return (
         <>
             <RestaurantPageCard/>
-            <ReviewCard reviews={reviews || []}/>
             <AddRestaurantReview restaurantId={restaurantId!}/>
+            <ReviewCard reviews={reviews || []}/>
         </>
     );
 }
