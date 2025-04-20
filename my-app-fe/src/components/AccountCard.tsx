@@ -8,6 +8,7 @@ function AccountCard() {
     const [reviews, setReviews] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchUserId()
@@ -21,10 +22,12 @@ function AccountCard() {
             .then(([userInfo, userReviews]) => {
                 setUser(userInfo);
                 setReviews(userReviews);
+                setLoading(false);
             })
             .catch(() => {
                 setUserId(null);
                 setError('Please log in to view your account info.');
+                setLoading(false);
             });
     }, []);
 
@@ -32,24 +35,28 @@ function AccountCard() {
     console.log("userId", userId)
 
 
+    if (loading) {
+        return <p>Loading user info...</p>;
+    }
+
     if (!userId) {
-        return null;
+        return <p> Nie ste prihlaseny </p>;
     }
 
     return (
         <div className="accountPlace">
             <div className="accountSpace">
-                <h2 className="userName">Name: {user[0].user_name}</h2>
+                <h2 className="userName">Meno: {user[0].user_name}</h2>
                 <ul>
-                    <li className="email">Email: {user[0].email}</li>
-                    <li className="review number">Number of reviews: {reviews.length}</li>
+                    <li className="email">Email: {user[0].email} </li>
+                    <li className="review number">Počet recenzií: {reviews.length}</li>
                     <li className="user type">
-                        User type: {user?.isadmin ? 'Admin' : 'Normal User'}
+                        Používateľské právomoci: {user?.isadmin ? 'Admin' : 'Normal User'}
                     </li>
                 </ul>
 
                 <div className="user-reviews">
-                    <h3>Your Reviews:</h3>
+                    <h3>Vaše recenzie:</h3>
                     {reviews.length > 0 ? (
                         <ul>
                             {reviews.map((review) => (
@@ -57,12 +64,12 @@ function AccountCard() {
                                     {review.restaurant_name} 
                                     <p>Hodnotenie: ⭐{review.hodnotenie}/10 </p>
                                     <p>Recenzia: "{review.sprava}" </p>
-                                    <p>Datum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
+                                    <p>Dátum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <p>You haven't written any reviews yet.</p>
+                        <p>Nenapísali ste žiadne recenzie.</p>
                     )}
                 </div>
             </div>
