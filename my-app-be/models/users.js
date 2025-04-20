@@ -45,3 +45,12 @@ exports.login = function(username) {
         [username]
     );
 };
+
+exports.getUserInfo = function (id) {
+    return pool.query(
+        `select user_name, email, isAdmin
+         FROM users
+         WHERE user_id = $1`, 
+        [id]
+    );
+};
