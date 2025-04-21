@@ -59,7 +59,7 @@ function AccountCard() {
                 <h2 className="userName">Meno: {user[0].user_name}</h2>
                 <ul>
                     <li className="email">Email: {user[0].email} </li>
-                    <li className="review number">Počet recenzií: {reviews.length}</li>
+                    <li className="rew num">Počet recenzií: {reviews.length}</li>
                     <li className="user type">
                         Používateľská právomoc: {user?.isadmin ? 'Admin' : 'Normal User'}
                     </li>
