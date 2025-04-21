@@ -1,4 +1,5 @@
 import { RestaurantReview } from '../types';
+import '/src/css/review.css'
 
 interface Props {
     reviews: RestaurantReview[];
@@ -7,13 +8,13 @@ interface Props {
 function ReviewCard({ reviews }: Props) {
     console.log('length: ', reviews.length)
     return (
-        <div className="cardPlace">
+        <div className="review-list">
             {reviews.map((reviews) => (
-                <div className="cardSpace" key={reviews.recenzia_id}>
-                    <p className="ReviewUser"> meno: {reviews.user_name}</p>
-                    <p className="ReviewText"> Sprava: {reviews.sprava} </p>
-                    <p className="ReviewScore"> hodnotenie: ⭐ {reviews.hodnotenie}/10 </p>
-                    <p className="ReviewDate"> Datum : {new Date(reviews.datum).toLocaleDateString()} </p>
+                <div className="review" key={reviews.recenzia_id}>
+                    <p className="review-user"> {reviews.user_name}</p>
+                    <p className="review-score"> hodnotenie: ⭐ {reviews.hodnotenie}/10 </p>
+                    <p className="review-text"> Sprava: {reviews.sprava} </p>
+                    <p className="review-date"> Datum : {new Date(reviews.datum).toLocaleDateString()} </p>
                 </div>
             ))}
         </div>
