@@ -4,6 +4,7 @@ import { Restaurant } from '../types';
 
 import { useEffect, useState } from 'react';
 import { getRestaurant } from '../services/restaurantService';
+import '/src/css/search.css'
 
 
 function RestaurantListPage() {
@@ -32,7 +33,7 @@ function RestaurantListPage() {
                 <form className="flex gap-2">
                 <input
                     type="text"
-                    placeholder="Zadajte reštauráciu..."
+                    placeholder="Zadajte nazov reštaurácie..."
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 </form>

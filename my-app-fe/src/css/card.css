@@ -58,3 +58,17 @@
 .cardLink:hover {
     color: #ffcc00;
 }
+
+.logout-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgb(250, 86, 86);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.logout-btn:hover {
+    background-color: darkred;
+}
+  
