@@ -6,11 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api/*': {
-        target: 'https://system-na-hodnotenie-restauracii.onrender.com/api/*',
-        changeOrigin: true,
-        secure: false
-      }
-    }
-  }
+      '/api': 'http://localhost:3000',
+    },
+  },
 })
