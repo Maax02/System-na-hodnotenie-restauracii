@@ -10,10 +10,6 @@ var pool = require('./config/db.js');
 const { config } = require('./config/config.js');
 require('dotenv').config()
 
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var restaurantsRouter = require('./routes/api_v1/restaurants');
 //var restaurantByIdRouter = require('./routes/api_v1/restaurants');
 
