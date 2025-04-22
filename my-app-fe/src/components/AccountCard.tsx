@@ -12,6 +12,7 @@ function AccountCard() {
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
+    console.log(error)
 
     useEffect(() => {
         fetchUserId()

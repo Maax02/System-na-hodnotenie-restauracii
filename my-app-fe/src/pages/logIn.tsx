@@ -14,6 +14,8 @@ function LogIn({ error, setError, setAuthStatus }: LogInProps) {
   const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false); // 👈 New
   const navigate = useNavigate();
 
+  console.log(error)
+
   useEffect(() => {
     fetch('/api/v1/auth/check', {
       credentials: 'include',

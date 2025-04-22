@@ -15,6 +15,7 @@ function App() {
 
   const [error, setError] = useState('');
   const [authStatus, setAuthStatus] = useState(false);
+  console.log(authStatus)
 
   return (
     <Router>
