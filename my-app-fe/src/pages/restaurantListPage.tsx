@@ -1,7 +1,5 @@
 import RestaurantCardDB from "../components/RestaurantCardDB";
 import { Restaurant } from '../types';
-//import { useEffect, useState } from 'react';
-
 import { useEffect, useState } from 'react';
 import { getRestaurant } from '../services/restaurantService';
 import '/src/css/search.css'

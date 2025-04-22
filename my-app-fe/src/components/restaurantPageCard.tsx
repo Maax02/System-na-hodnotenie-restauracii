@@ -37,7 +37,7 @@ function RestaurantPageCard() {
         <div className='restaurant-page-card'>
             <img src={`/images/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />
             <h1 className='restaurant-page-name'> {restaurant[0].restaurant_name} </h1>
-            <p className='restaurant-page-kitchen'> Kuchyna: {restaurant[0].kuchyna} </p>
+            <p className='restaurant-page-kitchen'> Kuchyňa: {restaurant[0].kuchyna} </p>
             <p className='restaurant-page-rating'> Hodnotenie: ⭐ {restaurant[0].average_rating} /10 </p>
             <p className='restaurant-page-address'> Adresa: {restaurant[0].street} {restaurant[0].street_number}, {restaurant[0].city}, {restaurant[0].psc} </p>
         </div>

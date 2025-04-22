@@ -5,15 +5,6 @@ const pool = require('../db');
 const { Pool } = require('pg');
 var router = express.Router();
 
-/*
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'database',
-    password: 'Maxik1317',
-    port: 5432,
-});
-*/
 router.post('/signUp', async (req, res) => {
     const { username, email, password } = req.body;
 
