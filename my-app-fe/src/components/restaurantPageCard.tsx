@@ -32,7 +32,7 @@ function RestaurantPageCard() {
     if (loading) return <p> Loading ... </p>;
     if (!restaurant) return <p>Restaurant not found.</p>;
 
-    console.log(restaurant[0])
+    //console.log(restaurant[0])
     return (
         <div className='restaurant-page-card'>
             <img src={`/images/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />

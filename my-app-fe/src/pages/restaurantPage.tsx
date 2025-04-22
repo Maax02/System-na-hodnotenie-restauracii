@@ -35,7 +35,7 @@ function RestaurantPage() {
     }
 
     if (loading) return <p> Loading ... </p>;
-    console.log("reviews", reviews);
+    //console.log("reviews", reviews);
 
     return (
         <>

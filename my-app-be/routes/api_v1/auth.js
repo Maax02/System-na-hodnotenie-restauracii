@@ -6,14 +6,14 @@ var router = express.Router();
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    console.log("sme v route")
+    //console.log("sme v route")
     login(username)
         .then((result) => {            
             if (result.rows && result.rows.length === 1) {                
                 const userId = result.rows[0].user_id;
                 const hashedPassword = result.rows[0].user_password;
-                console.log("userId", userId)
-                console.log("hashedpswd", hashedPassword)
+                //console.log("userId", userId)
+                //console.log("hashedpswd", hashedPassword)
                 comparePassword(password, hashedPassword)
                     .then((isValid) => {
                         if (isValid) {

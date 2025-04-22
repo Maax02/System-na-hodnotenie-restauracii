@@ -9,7 +9,7 @@ interface Props {
 
 function RestaurantCardDB({ restaurants, search }: Props) {
 
-    console.log("Card search: ", search)
+    //console.log("Card search: ", search)
     return (
         <div className="cardPlace">
             {restaurants.filter((restaurant) => {

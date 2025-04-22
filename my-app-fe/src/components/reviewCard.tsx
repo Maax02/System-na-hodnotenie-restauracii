@@ -6,7 +6,7 @@ interface Props {
 }
 
 function ReviewCard({ reviews }: Props) {
-    console.log('length: ', reviews.length)
+    //console.log('length: ', reviews.length)
     return (
         <div className="review-list">
             {reviews.map((reviews) => (

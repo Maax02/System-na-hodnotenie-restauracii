@@ -39,7 +39,7 @@ exports.getUser = function (id) {
 
 
 exports.login = function(username) {   
-    console.log("log in model")
+    //console.log("log in model")
     return pool.query(
         "select * from users u where u.user_name = $1",
         [username]

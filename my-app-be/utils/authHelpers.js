@@ -9,8 +9,8 @@ const hashPassword = (password) => {
 
 // returns promise!
 const comparePassword = (plainPassword, hashedPassword) => {
-    console.log("plain: ", plainPassword)
-    console.log("hash: ", hashedPassword)
+    //console.log("plain: ", plainPassword)
+    //console.log("hash: ", hashedPassword)
     return bcrypt.compare(plainPassword, hashedPassword);
 };
 

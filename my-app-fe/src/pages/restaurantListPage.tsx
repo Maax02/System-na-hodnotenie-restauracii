@@ -8,7 +8,7 @@ import '/src/css/search.css'
 function RestaurantListPage() {
     const [restaurants, setRestaurant] = useState<Restaurant[]>([]);
     const [search, setSearch] = useState<string>('') 
-    console.log(search) 
+    //console.log(search) 
   
     // periodically refresh (timer)
     useEffect(() => {

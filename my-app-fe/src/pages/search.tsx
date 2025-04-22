@@ -5,7 +5,7 @@ function Search() {
   
     const handleSearch = (e: FormEvent) => {
       e.preventDefault();
-      console.log(`Hľadaný výraz: ${searchTerm}`);
+      //console.log(`Hľadaný výraz: ${searchTerm}`);
     };
   
     return (
