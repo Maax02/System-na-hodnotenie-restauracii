@@ -33,7 +33,7 @@ function RestaurantListPage() {
                 <form className="flex gap-2">
                 <input
                     type="text"
-                    placeholder="Zadajte nazov reštaurácie..."
+                    placeholder="Zadajte názov reštaurácie..."
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 </form>

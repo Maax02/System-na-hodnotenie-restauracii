@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserId, getUserInfo, logout } from '../services/logInService';
 import { getUserReviews } from '../services/reviewService';
 import { useNavigate } from 'react-router-dom';
-import '/src/css/card.css';
+import '/src/css/account.css';
 
 function AccountCard() {
     const [userId, setUserId] = useState<any>(null);

@@ -5,42 +5,42 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-  }
-  
-  .add-review-form h3 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .add-review-form label {
-    display: block;
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .add-review-form select,
-  .add-review-form textarea,
-  .add-review-form button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .add-review-form button {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .add-review-form button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .add-review-form .error {
-    color: red;
-    margin-bottom: 10px;
-  }
+}
+
+.add-review-form h3 {
+  text-align: center;
+  color: #333;
+}
+
+.add-review-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.add-review-form select,
+.add-review-form textarea,
+.add-review-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-review-form button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.add-review-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-review-form .error {
+  color: red;
+  margin-bottom: 10px;
+}
   
