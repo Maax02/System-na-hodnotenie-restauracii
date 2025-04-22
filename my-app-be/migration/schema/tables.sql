@@ -1,5 +1,5 @@
 CREATE TYPE kitchen_type AS ENUM ('Slovenská', 'Talianská', 'Mexická', 'Azijská', 'Americká',
- 'Francúzska', 'Turecká', 'Indická', 'Vegánska', 'Vegetariánska', 'Mixed', 'Kaviareň', 'Thajská');
+ 'Francúzska', 'Turecká', 'Indická', 'Vegánska', 'Vegetariánska', 'Mixed');
 
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
