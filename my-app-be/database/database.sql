@@ -33,13 +33,3 @@ CREATE TABLE IF NOT EXISTS photo (
     restaurant_id INT REFERENCES restaurant(restaurant_id),
     recenzia_id INT
 );
-
-INSERT INTO restaurant (restaurant_name, street, street_number, city, psc, kuchyna) 
-VALUES
-('UFO', 'Most SNP', NULL, 'Bratislava', 85101, 'Mixed'),
-('Alaturka', 'Plynárenská', 6, 'Bratislava', 82109, 'Turecká'),
-('Šestka', 'Novohradská', 6, 'Bratislava', 82109, 'Mixed'),
-('Koliba Kamzik Zelená', 'Zelená', 5, 'Bratislava', 81101, 'Mixed'),
-('Modrá Hviezda', 'Beblavého', 14, 'Bratislava', 81101, 'Slovenská'),
-('Gatto Matto', 'Panská', 17, 'Bratislava', 81101, 'Talianská'),
-('MumBhai Central', 'Miletičova', 592, 'Bratislava', 82109, 'Indická');
