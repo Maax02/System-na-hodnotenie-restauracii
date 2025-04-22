@@ -62,9 +62,6 @@ app.use(
     })    
 );
 
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api/v1/restaurants', restaurantsRouter);
 //app.use('/api/v1/restaurants/:id', restaurantByIdRouter);
 
