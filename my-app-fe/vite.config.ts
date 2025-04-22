@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/*': {
-        target: 'https://system-na-hodnotenie-restauracii.onrender.com',
+        target: 'https://system-na-hodnotenie-restauracii.onrender.com/api/*',
         changeOrigin: true,
         secure: false
       }
