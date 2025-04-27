@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { getRestaurantReviews, getRestaurantAvg, getUserReviews, addReview } = require('../../models/reviews')
+var { getRestaurantReviews, getRestaurantAvg, getUserReviews, addReview, deleteReview} = require('../../models/reviews')
 var router = express.Router();
 
 router.get('/:id', function (req, res, next) {
@@ -53,6 +53,16 @@ router.post('/', function (req, res, next) {
         .catch((e) => {
             console.log(e);
             res.status(500).send("Error adding review");
+        });
+});
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    deleteReview(id)
+        .then(() => res.status(200).json({ message: "Review deleted" }))
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("Error deleting review");
         });
 });
 

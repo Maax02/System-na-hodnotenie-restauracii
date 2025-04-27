@@ -47,3 +47,10 @@ exports.addReview = function(user_id, restaurant_id, hodnotenie, sprava) {
         values ($1, $2, $3, $4, NOW())`
         , [user_id, restaurant_id, hodnotenie, sprava]);
 };
+
+exports.deleteReview = function(id) {
+    return pool.query(
+        `DELETE FROM recenzia WHERE recenzia_id = $1`,
+        [id]
+    );
+};

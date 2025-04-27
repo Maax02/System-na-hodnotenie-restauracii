@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchUserId, getUserInfo, logout } from '../services/logInService';
-import { getUserReviews } from '../services/reviewService';
+import { getUserReviews, reviewDel } from '../services/reviewService';
 import { useNavigate } from 'react-router-dom';
 import '/src/css/account.css';
 
@@ -46,6 +46,17 @@ function AccountCard() {
             });
     };
 
+    const deleteReview = (reviewId: number) => {
+        reviewDel(reviewId)
+            .then(() => {
+                navigate('/account');
+            })
+            .catch((error) => {
+                console.error("Delete failed:", error);
+                setError("Chyba pri mazani recenzie.");
+            });
+    };
+
     if (loading) {
         return <p>Načítavanie ...</p>;
     }
@@ -80,6 +91,8 @@ function AccountCard() {
                                     <p>Hodnotenie: ⭐{review.hodnotenie}/10 </p>
                                     <p>Správa: "{review.sprava}" </p>
                                     <p>Dátum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
+                                    <button className='delete' type='button' onClick={() => deleteReview(review.recenzia_id)}>
+                                        Delete </button>
                                 </li>
                             ))}
                         </ul>

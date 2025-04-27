@@ -46,4 +46,17 @@ function addReview(userId: number, restaurantId: string, rating: number, message
 }
 
 
-export { getRestaurantReviews, getUserReviews, addReview };
+function reviewDel(reviewId: number) {
+    return fetch(`/api/v1/reviews/${reviewId}`, {
+        method: "DELETE",
+        credentials: "include",  // 👈 if you use sessions, always include this
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error("Failed to delete review");
+        }
+        return response.json();
+    });
+}
+
+
+export { getRestaurantReviews, getUserReviews, addReview, reviewDel };
