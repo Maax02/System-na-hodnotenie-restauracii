@@ -28,7 +28,7 @@ function ReviewCard({ reviews }: Props) {
                 ]);
             })
             .then(([userInfo]) => {
-                setUser(userInfo);
+                setUser(userInfo[0]);
                 setLoading(false);
             })
             .catch(() => {
@@ -52,7 +52,6 @@ function ReviewCard({ reviews }: Props) {
     if (loading) {
         return <p>Načítavanie ...</p>;
     }
-    console.log(user[0].isadmin)
     
     return (
         <div className="review-list">
@@ -62,7 +61,7 @@ function ReviewCard({ reviews }: Props) {
                     <p className="review-score"> hodnotenie: ⭐ {reviews.hodnotenie}/10 </p>
                     <p className="review-text"> Sprava: {reviews.sprava} </p>
                     <p className="review-date"> Datum : {new Date(reviews.datum).toLocaleDateString()} </p>
-                    {user[0].isadmin && (
+                    {user && user.isadmin && (
                     <button className="delete" onClick={() => deleteReview(reviews.recenzia_id)}>
                         Delete Review
                     </button>
