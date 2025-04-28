@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import '/src/css/signUp.css';
 import { addUser } from '../services/signUpService';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState<string | null>(null);
+    const navigate = useNavigate()
 
     async function signUp() {
         try {
@@ -23,6 +25,7 @@ function SignUp() {
                 setUsername('');
                 setEmail('');
                 setPassword('');
+                navigate('/logIn')
             } else {
                 setMessage(data.error || 'Registrácia neúspešná.');
             }
