@@ -12,15 +12,16 @@ const pool = new Pool({
 });
 */
 
-exports.getRestaurants = function() {
+exports.getRestaurants = function(order = 'DESC') {
     //return pool.query(`select restaurant_id, restaurant_name, kuchyna from restaurant`);
+    const orderFilter = (order === 'ASC' || order === 'DESC') ? order : 'DESC';
     return pool.query(`
         select r.restaurant_id, r.restaurant_name, r.street, r.street_number, r.city, r.psc, r.kuchyna,
             AVG(rv.hodnotenie) AS average_rating
-            FROM restaurant r
-            LEFT JOIN recenzia rv ON r.restaurant_id = rv.restaurant_id
-            GROUP BY r.restaurant_id, r.restaurant_name, r.street, r.street_number, r.city, r.psc, r.kuchyna
-            ORDER BY average_rating DESC;`)
+        FROM restaurant r
+        LEFT JOIN recenzia rv ON r.restaurant_id = rv.restaurant_id
+        GROUP BY r.restaurant_id, r.restaurant_name, r.street, r.street_number, r.city, r.psc, r.kuchyna
+        ORDER BY average_rating ${orderFilter};`);
 };
 
 /*

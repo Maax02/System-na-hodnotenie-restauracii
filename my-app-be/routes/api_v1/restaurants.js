@@ -4,7 +4,8 @@ const { getUserReviews } = require('../../models/reviews');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-    getRestaurants().then(
+    const order = req.query.order;
+    getRestaurants(order).then(
         (restaurant) => {
             res.json(restaurant.rows);
         }

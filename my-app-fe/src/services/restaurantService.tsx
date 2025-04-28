@@ -1,5 +1,5 @@
-function getRestaurant() {
-    return fetch("/api/v1/restaurants").then(  // promise is resolved
+function getRestaurant(order: string) {
+    return fetch(`/api/v1/restaurants?order=${order}`).then(  // promise is resolved
         (response) => {
             if (!response.ok) { // HTTP status code NOT between 200-299
                 throw new Error("Error getting restaurants");

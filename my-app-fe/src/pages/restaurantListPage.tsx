@@ -6,39 +6,54 @@ import '/src/css/search.css'
 
 
 function RestaurantListPage() {
-    const [restaurants, setRestaurant] = useState<Restaurant[]>([]);
-    const [search, setSearch] = useState<string>('') 
-    //console.log(search) 
-  
-    // periodically refresh (timer)
-    useEffect(() => {
-      getRestaurant().then(
-        (restaurants) => setRestaurant(restaurants)
-      );
-  
-      const fetchMessagesInterval = setInterval(() => {
-          getRestaurant().then(
-            (restaurant) => setRestaurant(restaurant)
-          );
-        }, 10000);
-      return () => clearInterval(fetchMessagesInterval);
-    }, []);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [order, setOrder] = useState<string>('DESC');
+  const [kitchenFilter, setKitchenFilter] = useState<string>('');
+  console.log(kitchenFilter)
 
+  useEffect(() => {
+    fetchRestaurants();
+  }, [order]);
 
-    return (
-        <>
-            <div className='search'>
-                <form className="flex gap-2">
-                <input
-                    type="text"
-                    placeholder="Zadajte názov reštaurácie..."
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-                </form>
-            </div>
-            <RestaurantCardDB restaurants={restaurants} search={search} />
-        </>
-    )
+  function fetchRestaurants() {
+    getRestaurant(order).then((restaurants) => setRestaurants(restaurants));
   }
+
+  function scoreOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+    setOrder(e.target.value);
+  }
+
+  return (
+    <>
+      <div className="search">
+        <form className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Zadajte názov reštaurácie..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </form>
+
+        <select onChange={scoreOrder} value={order}>
+          <option value="DESC">Najlepšie hodnotené</option>
+          <option value="ASC">Najhoršie hodnotené</option>
+        </select>
+
+        <select onChange={(e) => setKitchenFilter(e.target.value)}>
+          <option value="">Všetky kuchyne</option>
+          <option value="Slovenská">Slovenská</option>
+          <option value="Talianska">Talianska</option>
+          <option value="Ázijská">Ázijská</option>
+          <option value="Indická">Indická</option>
+          <option value="Americká">Americká</option>
+        </select>
+      </div>
+
+      <RestaurantCardDB restaurants={restaurants} search={search} />
+    </>
+  );
+}
+
   
   export default RestaurantListPage;
