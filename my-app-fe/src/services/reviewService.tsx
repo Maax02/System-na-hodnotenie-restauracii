@@ -49,10 +49,10 @@ function addReview(userId: number, restaurantId: string, rating: number, message
 function reviewDel(reviewId: number) {
     return fetch(`/api/v1/reviews/${reviewId}`, {
         method: "DELETE",
-        credentials: "include",  // 👈 if you use sessions, always include this
+        credentials: "include",
     }).then((response) => {
         if (!response.ok) {
-            throw new Error("Failed to delete review");
+            throw new Error("Failed to delete user");
         }
         return response.json();
     });

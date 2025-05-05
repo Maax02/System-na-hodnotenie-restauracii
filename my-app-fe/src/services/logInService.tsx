@@ -55,9 +55,39 @@ function getUserInfo(id: number) {
           // Better way would be to throw error here and let the 
           // client handle (e.g. show error message)
           // Returning empty array for simplicity only!
-          console.log("Error getting messages", error);
+          console.log("Error getting user info", error);
           return [];
       });
 }
 
-export { login, fetchUserId, logout, getUserInfo };
+function getUserByName(name: string) {
+  return fetch(`/api/v1/users/name/${name}`).then(  // promise is resolved
+      (response) => {
+          if (!response.ok) { // HTTP status code NOT between 200-299
+              throw new Error("Error getting user by name");
+          }
+          return response.json();
+      }).catch((error) => {               // promise is rejected  
+          // Better way would be to throw error here and let the 
+          // client handle (e.g. show error message)
+          // Returning empty array for simplicity only!
+          console.log("Error getting user by name", error);
+          return [];
+      });
+}
+
+
+function userDel(user_id: number) {
+  console.log("service: ", user_id)
+  return fetch(`/api/v1/users/delete/${user_id}`, {
+      method: "DELETE",
+      credentials: "include",
+  }).then((response) => {
+      if (!response.ok) {
+          throw new Error("Failed to delete user");
+      }
+      return response.json();
+  });
+}
+
+export { login, fetchUserId, logout, getUserInfo, getUserByName, userDel};

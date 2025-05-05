@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { addUser, getUserInfo } = require('../../models/users')
+var { addUser, getUserInfo, getUserByName, deleteUser } = require('../../models/users')
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -26,6 +26,32 @@ router.get('/:id', function (req, res, next) {
             res.status(500).send("Error fetching user info");
         }
     );
+});
+
+router.get('/name/:name', function (req, res, next) {
+    const name = req.params.name;
+    getUserByName(name).then(
+        (user) => {
+            res.json(user.rows);
+        }
+    ).catch(
+        (err) => {
+            console.log(err);
+            res.status(500).send("Error fetching user by name");
+        }
+    );
+});
+
+router.delete('/delete/:user_id', (req, res) => {
+    console.log("DELETE /users/:user_id hit with:", req.params.user_id);
+    const user_id = req.params.user_id;
+    deleteUser(user_id)
+        .then(() => res.status(200).json({ message: "User deleted" }))
+        .catch((err) => {
+            console.log(err);
+            console.log("Error in deleteUser:", err);
+            res.status(500).send("Error deleting user");
+        });
 });
 
 module.exports = router; // ESM: export

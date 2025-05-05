@@ -54,3 +54,19 @@ exports.getUserInfo = function (id) {
         [id]
     );
 };
+
+exports.getUserByName = function (name) {
+    return pool.query(
+        `select user_id, user_name, email, isAdmin
+         FROM users
+         WHERE user_name = $1`, 
+        [name]
+    );
+};
+
+exports.deleteUser = function(id) {
+    return pool.query(
+        `DELETE FROM users WHERE user_id = $1`,
+        [id]
+    );
+};

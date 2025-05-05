@@ -65,6 +65,7 @@ function AddRestaurantReview({ restaurantId }: Props) {
             required
           />
         </label>
+        <input type='file' />
         <button type="submit" disabled={loading}>
           {loading ? "Odosiela sa..." : "Odoslať"}
         </button>
