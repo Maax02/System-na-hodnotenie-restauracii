@@ -9,7 +9,7 @@ interface Props {
 
 function AddRestaurantReview({ restaurantId }: Props) {
   const [message, setMessage] = useState("");
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(10);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<number | null>(null);
@@ -34,7 +34,7 @@ function AddRestaurantReview({ restaurantId }: Props) {
       }
       await addReview(userId, restaurantId, rating, message);
       setMessage("");
-      setRating(5);
+      setRating(10);
     } catch {
       setError("Nepodarilo sa odoslať recenziu.");
     } finally {
