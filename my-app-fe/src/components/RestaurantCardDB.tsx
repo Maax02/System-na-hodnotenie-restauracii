@@ -22,7 +22,7 @@ function RestaurantCardDB({ restaurants, search }: Props) {
                     <img src={`/images/${restaurant.restaurant_id}.png`} alt="rest-0" className="cardImage" />
                     <h2 className="cardName">{restaurant.restaurant_name}</h2>
                     <p className="cardKitchen"> {restaurant.kuchyna} </p>
-                    <p className="cardScore"> Hodnotenie: ⭐ {restaurant.average_rating}/10 </p>
+                    <p className="cardScore"> Hodnotenie: ⭐ {parseFloat(Number(restaurant.average_rating).toFixed(2))}/10 </p>
                     <Link to={`/restaurants/${restaurant.restaurant_id}_${encodeURIComponent(
                     restaurant.restaurant_name
                     )}`} className="cardLink"> Viac informacii </Link>
