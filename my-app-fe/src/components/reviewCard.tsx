@@ -52,12 +52,14 @@ function ReviewCard({ reviews }: Props) {
     if (loading) {
         return <p>Načítavanie ...</p>;
     }
+
+    console.log(reviews)
     
     return (
         <div className="review-list">
             {reviews.map((reviews) => (
                 <div className="review" key={reviews.recenzia_id}>
-                    <p className="review-user"> {reviews.user_name}</p>
+                    <p className="review-user"> {reviews.user_name ? reviews.user_name : '<deleted user>'}</p>
                     <p className="review-score"> hodnotenie: ⭐ {reviews.hodnotenie}/10 </p>
                     <p className="review-text"> Sprava: {reviews.sprava} </p>
                     <p className="review-date"> Datum : {new Date(reviews.datum).toLocaleDateString()} </p>
