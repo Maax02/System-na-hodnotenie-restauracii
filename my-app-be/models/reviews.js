@@ -16,7 +16,7 @@ exports.getRestaurantReviews = function(id) {
     return pool.query(
         `select r.recenzia_id, r.restaurant_id, r.user_id, r.hodnotenie, r.sprava, r.datum, u.user_name, u.email
         from recenzia r
-        join users as u on r.user_id = u.user_id
+        left join users as u on r.user_id = u.user_id
         where restaurant_id = $1`,
         [id]);
 };
