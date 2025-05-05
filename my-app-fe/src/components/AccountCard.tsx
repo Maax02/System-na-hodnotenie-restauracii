@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchUserId, getUserInfo, logout, getUserByName, userDel, makeAdmin } from '../services/logInService';
 import { getUserReviews, reviewDel } from '../services/reviewService';
+import { addToRestaurants } from '../services/restaurantService';
 import { useNavigate } from 'react-router-dom';
 import '/src/css/account.css';
 
@@ -10,9 +11,17 @@ function AccountCard() {
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+
     const [userSearch, setUserSearch] = useState<any>('');
     const [userSearchResult, setUserSearchResult] = useState<any>('');
     const [renderUser, setRenderUser] = useState(false);
+
+    const [restaurantName, setRestaurantName] = useState<string>('')
+    const [kitchenType, setKitchenType] = useState<string>('')
+    const [street, setStreet] = useState<string>('')
+    const [streetNumber, setStreetNumber] = useState<number>(0)
+    const [psc, setPSC] = useState<number>(0)
+    const [city, setCity] = useState<string>('')
 
     const navigate = useNavigate();
     console.log(error)
@@ -90,6 +99,10 @@ function AccountCard() {
         });
     };
 
+    const addRestaurant = () => {
+        addToRestaurants(restaurantName, kitchenType, street, streetNumber, psc, city)
+    }
+
     console.log(userSearch[0])
 
     if (loading) {
@@ -118,6 +131,7 @@ function AccountCard() {
 
                 {user[0] && user[0].isadmin &&
                     <div className='AdminWork'>
+                        <p> Uprav uzivatela </p>
                         <form className="userForm" onSubmit={(e: any) => {e.preventDefault(); handleUserSearch();}}>
                             <input
                             type="text"
@@ -142,6 +156,23 @@ function AccountCard() {
                         <button className='adminUser' onClick={adminUser}> Urob adminom </button>
                     </div>
                 }
+
+                {user[0] && user[0].isadmin &&
+                    <div>
+                        <p> Pridat restauraciu </p>
+                        
+                        <div className='restaurantForm'>
+                            <input type="text" placeholder="Nazov restauracie" value={restaurantName} onChange={(e) => setRestaurantName(e.target.value)}/>
+                            <input type="text" placeholder="Kuchyna" value={kitchenType} onChange={(e) => setKitchenType(e.target.value)}/>
+                            <input type="text" placeholder="Ulica" value={street} onChange={(e) => setStreet(e.target.value)}/>
+                            <input type="text" placeholder="Cislo ulice" value={streetNumber} onChange={(e) => setStreetNumber(Number(e.target.value))}/>
+                            <input type="text" placeholder="PSC" value={psc} onChange={(e) => setPSC(Number(e.target.value))}/>
+                            <input type="text" placeholder="Mesto" value={city} onChange={(e) => setCity(e.target.value)}/>
+                            <button className='button-add-restaurant' onClick={addRestaurant}> Pridat restauraciu </button>
+                        </div>
+                    </div>
+                    
+                } 
 
                 <div className="user-reviews">
                     <h3>Vaše recenzie:</h3>

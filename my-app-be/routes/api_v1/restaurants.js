@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { getRestaurants, getRestaurantById } = require('../../models/restaurants');
+var { getRestaurants, getRestaurantById, addToRestaurants } = require('../../models/restaurants');
 const { getUserReviews } = require('../../models/reviews');
 var router = express.Router();
 
@@ -32,5 +32,15 @@ router.get('/:id', function (req, res, next) {
     );
 });
 
+router.post('/add', function (req, res, next) {
+    addToRestaurants(req.body).then(
+        (r) => res.status(201).json({ message: 'Restauracia bola uspesne pridana!' })
+    ).catch(
+        (e) => {
+            console.log(e);
+            res.status(500).json({ error: 'Resdtauraciu sa nepodarilo pridat.' });
+        }
+    );
+});
 
 module.exports = router; // ESM: export

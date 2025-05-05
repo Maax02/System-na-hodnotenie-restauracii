@@ -30,4 +30,22 @@ function getRestaurantById(id: string) {
         });
 }
 
-export { getRestaurant, getRestaurantById };
+function addToRestaurants(name : string, kitchen: string, street: string, number: number, psc: number, city: string) {
+    const newRestaurant = {
+        name,
+        kitchen,
+        street,
+        number,
+        psc,
+        city
+    };
+    return fetch("/api/v1/restaurants/add", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newRestaurant)
+    });
+}
+
+export { getRestaurant, getRestaurantById, addToRestaurants };

@@ -45,3 +45,12 @@ exports.addRestaurant = function(restaurant_name, kuchyna, street, street_number
         values ($1, $2, $3, $4, $5, $6)`,
         [restaurant_name, kuchyna, street, street_number, city, psc]);
 }
+
+
+exports.addToRestaurants = function(restaurant) {
+    const { name, kitchen, street, number, psc, city } = restaurant;
+    return pool.query(
+        `insert into restaurant (restaurant_name, street, street_number, city, psc, kuchyna) 
+        values ($1, $2, $3, $4, $5, $6)`
+        , [name, street, number, city, psc, kitchen]);
+};
