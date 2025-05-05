@@ -70,3 +70,12 @@ exports.deleteUser = function(id) {
         [id]
     );
 };
+
+exports.makeAdmin = function(id) {
+    return pool.query(
+        `update users
+        set isadmin = true
+        where user_id = $1`,
+        [id]
+    );
+};

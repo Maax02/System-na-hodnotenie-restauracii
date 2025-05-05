@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { addUser, getUserInfo, getUserByName, deleteUser } = require('../../models/users')
+var { addUser, getUserInfo, getUserByName, deleteUser, makeAdmin } = require('../../models/users')
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -46,6 +46,18 @@ router.delete('/delete/:user_id', (req, res) => {
     console.log("DELETE /users/:user_id hit with:", req.params.user_id);
     const user_id = req.params.user_id;
     deleteUser(user_id)
+        .then(() => res.status(200).json({ message: "User deleted" }))
+        .catch((err) => {
+            console.log(err);
+            console.log("Error in deleteUser:", err);
+            res.status(500).send("Error deleting user");
+        });
+});
+
+
+router.put('/makeAdmin/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    makeAdmin(user_id)
         .then(() => res.status(200).json({ message: "User deleted" }))
         .catch((err) => {
             console.log(err);

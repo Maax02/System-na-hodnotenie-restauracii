@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchUserId, getUserInfo, logout, getUserByName, userDel } from '../services/logInService';
+import { fetchUserId, getUserInfo, logout, getUserByName, userDel, makeAdmin } from '../services/logInService';
 import { getUserReviews, reviewDel } from '../services/reviewService';
 import { useNavigate } from 'react-router-dom';
 import '/src/css/account.css';
@@ -79,6 +79,17 @@ function AccountCard() {
         });
     };
 
+    const adminUser = () => {
+        console.log("Admin user: ", userSearchResult[0].user_id)
+        makeAdmin(userSearchResult[0].user_id).then(() => {
+            navigate('/account');
+        })
+        .catch((error) => {
+            console.error("Admin update failed:", error);
+            setError("Chyba pri update usera na admina.");
+        });
+    };
+
     console.log(userSearch[0])
 
     if (loading) {
@@ -128,6 +139,7 @@ function AccountCard() {
                         <p>Admin: {userSearchResult[0].isadmin ? 'Admin' : 'Normal User'}</p>
 
                         <button className='delUser' onClick={delUser}> Vymaz pouzivatela </button>
+                        <button className='adminUser' onClick={adminUser}> Urob adminom </button>
                     </div>
                 }
 

@@ -90,4 +90,14 @@ function userDel(user_id: number) {
   });
 }
 
-export { login, fetchUserId, logout, getUserInfo, getUserByName, userDel};
+function makeAdmin(user_id: number) {
+  return fetch(`/api/v1/users/makeAdmin/${user_id}`, {
+      method: "PUT",  
+      headers: {
+          "Content-Type": "application/json",
+      },
+  });
+}
+
+
+export { login, fetchUserId, logout, getUserInfo, getUserByName, userDel, makeAdmin};
