@@ -33,3 +33,17 @@ CREATE TABLE IF NOT EXISTS photo (
     restaurant_id INT REFERENCES restaurant(restaurant_id),
     recenzia_id INT
 );
+
+
+
+ALTER TABLE recenzia
+ALTER COLUMN user_id DROP NOT NULL;
+
+ALTER TABLE recenzia
+DROP CONSTRAINT IF EXISTS recenzia_user_id_fkey;
+
+ALTER TABLE recenzia
+ADD CONSTRAINT recenzia_user_id_fkey
+FOREIGN KEY (user_id)
+REFERENCES users(user_id)
+ON DELETE SET NULL;
