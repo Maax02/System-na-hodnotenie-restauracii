@@ -5,7 +5,8 @@ var router = express.Router();
 
 router.get('/', function (req, res, next) {
     const order = req.query.order;
-    getRestaurants(order).then(
+    const kitchenFilter = req.query.kitchenFilter;
+    getRestaurants(order, kitchenFilter).then(
         (restaurant) => {
             res.json(restaurant.rows);
         }

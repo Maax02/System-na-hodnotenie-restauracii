@@ -14,14 +14,18 @@ function RestaurantListPage() {
 
   useEffect(() => {
     fetchRestaurants();
-  }, [order]);
+  }, [order, kitchenFilter]);
 
   function fetchRestaurants() {
-    getRestaurant(order).then((restaurants) => setRestaurants(restaurants));
+    getRestaurant(order, kitchenFilter).then((restaurants) => setRestaurants(restaurants));
   }
 
   function scoreOrder(e: React.ChangeEvent<HTMLSelectElement>) {
     setOrder(e.target.value);
+  }
+
+  function kitchenOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+    setKitchenFilter(e.target.value);
   }
 
   return (
@@ -40,13 +44,22 @@ function RestaurantListPage() {
           <option value="ASC">Najhoršie hodnotené</option>
         </select>
 
-        <select onChange={(e) => setKitchenFilter(e.target.value)}>
+        <select onChange={kitchenOrder} value={kitchenFilter}>
           <option value="">Všetky kuchyne</option>
           <option value="Slovenská">Slovenská</option>
-          <option value="Talianska">Talianska</option>
-          <option value="Ázijská">Ázijská</option>
-          <option value="Indická">Indická</option>
+          <option value="Talianská">Talianská</option>
+          <option value="Mexická">Mexická</option>
+          <option value="Azijská">Azijská</option>
           <option value="Americká">Americká</option>
+          <option value="Francúzska">Francúzska</option>
+          <option value="Turecká">Turecká</option>
+          <option value="Indická">Indická</option>
+          <option value="Vegánska">Vegánska</option>
+          <option value="Vegetariánska">Vegetariánska</option>
+          <option value="Mixed">Mixed</option>
+          <option value="Thajská">Thajská</option>
+          <option value="Kaviareň">Kaviareň</option>
+          <option value="Európska">Európska</option>
         </select>
       </div>
 
