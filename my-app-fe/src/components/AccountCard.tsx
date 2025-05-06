@@ -150,6 +150,11 @@ function AccountCard() {
         });
     };
 
+    function kitchenOrder(e: React.ChangeEvent<HTMLSelectElement>) {
+        setKitchenType(e.target.value);
+      }
+    
+
     console.log(userSearch[0])
 
     if (loading) {
@@ -210,7 +215,22 @@ function AccountCard() {
                         
                         <div className='restaurantForm'>
                             <input type="text" placeholder="Nazov restauracie" value={restaurantName} onChange={(e) => setRestaurantName(e.target.value)}/>
-                            <input type="text" placeholder="Kuchyna" value={kitchenType} onChange={(e) => setKitchenType(e.target.value)}/>
+                            <select onChange={kitchenOrder} value={kitchenType}>
+                                <option value="Slovenská">Slovenská</option>
+                                <option value="Talianská">Talianská</option>
+                                <option value="Mexická">Mexická</option>
+                                <option value="Azijská">Azijská</option>
+                                <option value="Americká">Americká</option>
+                                <option value="Francúzska">Francúzska</option>
+                                <option value="Turecká">Turecká</option>
+                                <option value="Indická">Indická</option>
+                                <option value="Vegánska">Vegánska</option>
+                                <option value="Vegetariánska">Vegetariánska</option>
+                                <option value="Mixed">Mixed</option>
+                                <option value="Thajská">Thajská</option>
+                                <option value="Kaviareň">Kaviareň</option>
+                                <option value="Európska">Európska</option>
+                            </select>
                             <input type="text" placeholder="Ulica" value={street} onChange={(e) => setStreet(e.target.value)}/>
                             <input type="text" placeholder="Cislo ulice" value={streetNumber} onChange={(e) => setStreetNumber(Number(e.target.value))}/>
                             <input type="text" placeholder="PSC" value={psc} onChange={(e) => setPSC(Number(e.target.value))}/>
