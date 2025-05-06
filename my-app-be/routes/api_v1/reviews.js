@@ -2,6 +2,33 @@ var express = require('express'); // ESM: import
 var { getRestaurantReviews, getRestaurantAvg, getUserReviews, addReview, deleteReview} = require('../../models/reviews')
 var router = express.Router();
 
+var multer = require('multer');
+var fs = require('fs');
+var path = require('path');
+const uploadDir = path.join(__dirname, '../../upload/reviewPhoto');
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        const reviewId = req.params.review_id;
+        const ext = path.extname(file.originalname);
+        cb(null, `${reviewId}${ext}`);
+    }
+});
+
+const upload = multer({ storage });
+
+router.post('/upload/:review_id', upload.single('photo'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Fotka nepridana' });
+    }
+
+    res.status(200).json({ message: 'Fotka pridana', filename: req.file.filename });
+});
+
 router.get('/:id', function (req, res, next) {
     const id = req.params.id;
     getRestaurantReviews(id).then(
@@ -47,8 +74,9 @@ router.get('/user/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
     const { user_id, restaurant_id, hodnotenie, sprava } = req.body;
     addReview(user_id, restaurant_id, hodnotenie, sprava)
-        .then(() => {
-            res.status(200).send("Review added");
+        .then((result) => {
+            const reviewId = result.rows[0].recenzia_id;
+            res.status(200).json({ message: "Review added", recenzia_id: reviewId });
         })
         .catch((e) => {
             console.log(e);

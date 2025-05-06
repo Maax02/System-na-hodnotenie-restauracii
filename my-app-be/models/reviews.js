@@ -44,7 +44,8 @@ exports.getUserReviews = function(id) {
 exports.addReview = function(user_id, restaurant_id, hodnotenie, sprava) {
     return pool.query(
         `insert into recenzia (user_id, restaurant_id, hodnotenie, sprava, datum)
-        values ($1, $2, $3, $4, NOW())`
+        values ($1, $2, $3, $4, NOW())
+        RETURNING recenzia_id`
         , [user_id, restaurant_id, hodnotenie, sprava]);
 };
 

@@ -59,4 +59,15 @@ function reviewDel(reviewId: number) {
 }
 
 
-export { getRestaurantReviews, getUserReviews, addReview, reviewDel };
+function uploadPhoto(reviewId: number, file: File) {
+    const formData = new FormData();
+    formData.append('photo', file);
+
+    return fetch(`/api/v1/reviews/upload/${reviewId}`, {
+        method: 'POST',
+        body: formData,
+    });
+}
+
+
+export { getRestaurantReviews, getUserReviews, addReview, reviewDel, uploadPhoto };

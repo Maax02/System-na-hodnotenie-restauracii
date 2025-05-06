@@ -63,6 +63,8 @@ function ReviewCard({ reviews }: Props) {
                     <p className="review-score"> hodnotenie: ⭐ {reviews.hodnotenie}/10 </p>
                     <p className="review-text"> Sprava: {reviews.sprava} </p>
                     <p className="review-date"> Datum : {new Date(reviews.datum).toLocaleDateString()} </p>
+                    <img src={`https://system-na-hodnotenie-restauracii.onrender.com/uploads/restaurantPhoto/${reviews.recenzia_id}.png`}
+                     alt="Recenzia fotka" onError={(e) => (e.currentTarget.style.display = "none")} className="review-photo"/>
                     {user && user.isadmin && (
                     <button className="delete" onClick={() => deleteReview(reviews.recenzia_id)}>
                         Delete Review

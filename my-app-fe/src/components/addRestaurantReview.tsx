@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addReview } from "../services/reviewService";
+import { addReview, uploadPhoto } from "../services/reviewService";
 import { fetchUserId } from "../services/logInService";
 import '/src/css/addReview.css';
 
@@ -14,6 +14,8 @@ function AddRestaurantReview({ restaurantId }: Props) {
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<number | null>(null);
 
+  const [photo, setPhoto] = useState<File | null>(null);
+
   useEffect(() => {
     fetchUserId()
       .then((userData) => {
@@ -27,20 +29,38 @@ function AddRestaurantReview({ restaurantId }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
+  
     try {
       if (!userId) {
         setError("Musíte byť prihlásený na pridanie recenzie.");
         return;
       }
-      await addReview(userId, restaurantId, rating, message);
+  
+      const res = await addReview(userId, restaurantId, rating, message);
+      const data = await res.json();
+      const reviewId = data.recenzia_id;
+  
+      if (photo && reviewId) {
+        await uploadPhoto(reviewId, photo);
+      }
+  
       setMessage("");
       setRating(10);
-    } catch {
-      setError("Nepodarilo sa odoslať recenziu.");
+      setPhoto(null);
+    } catch (err) {
+      console.error(err);
+      setError("Nepodarilo sa odoslať recenziu alebo fotku.");
     } finally {
       setLoading(false);
     }
   };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+        setPhoto(e.target.files[0]);
+    }
+};
 
   if (!userId) return <p>Pre napisanie recenzie sa musíte prihlásiť.</p>;
 
@@ -65,7 +85,7 @@ function AddRestaurantReview({ restaurantId }: Props) {
             required
           />
         </label>
-        <input type='file' />
+        <input type="file" accept="image/*" onChange={handleFileChange} />
         <button type="submit" disabled={loading}>
           {loading ? "Odosiela sa..." : "Odoslať"}
         </button>
