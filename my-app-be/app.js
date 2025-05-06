@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var multer = require('multer');
+
 var session = require('express-session');
 const PgSession = require("connect-pg-simple")(session);
 var pool = require('./config/db.js');
@@ -71,5 +73,7 @@ app.use('/api/v1/reviews/', reviewByRestaurantId);
 //app.use('/api/v1/reviews/', restaurantByIdRouter);
 
 app.use('/api/v1/auth', authRouter);
+
+app.use('/uploads', express.static(path.join(__dirname, 'upload')));
 
 module.exports = app;

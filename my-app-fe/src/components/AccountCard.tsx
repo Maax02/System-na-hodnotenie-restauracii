@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchUserId, getUserInfo, logout, getUserByName, userDel, makeAdmin } from '../services/logInService';
 import { getUserReviews, reviewDel } from '../services/reviewService';
-import { addToRestaurants } from '../services/restaurantService';
+import { addToRestaurants, uploadPhoto } from '../services/restaurantService';
 import { useNavigate } from 'react-router-dom';
 import '/src/css/account.css';
 
@@ -22,6 +22,8 @@ function AccountCard() {
     const [streetNumber, setStreetNumber] = useState<number>(0)
     const [psc, setPSC] = useState<number>(0)
     const [city, setCity] = useState<string>('')
+
+    const [photo, setPhoto] = useState<File | null>(null);
 
     const navigate = useNavigate();
     console.log(error)
@@ -99,9 +101,31 @@ function AccountCard() {
         });
     };
 
-    const addRestaurant = () => {
-        addToRestaurants(restaurantName, kitchenType, street, streetNumber, psc, city)
-    }
+    const addRestaurant = async () => {
+        try {
+            const response = await addToRestaurants(restaurantName, kitchenType, street, streetNumber, psc, city);
+            const data = await response.json();
+    
+            const restaurantId = data.restaurant_id;
+            console.log("addRest id: ", restaurantId);
+    
+            if (response.ok && restaurantId && photo) {
+                await uploadPhoto(restaurantId, photo);
+                alert("Reštaurácia a fotka sa úspešne nahrali!");
+            } else {
+                console.error("Reštaurácia sa nepodarila nahrať", data);
+            }
+        } catch (error) {
+            console.error("Chyba pri pridávaní reštaurácie:", error);
+        }
+    };
+
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setPhoto(e.target.files[0]);
+        }
+    };
 
     console.log(userSearch[0])
 
@@ -168,6 +192,7 @@ function AccountCard() {
                             <input type="text" placeholder="Cislo ulice" value={streetNumber} onChange={(e) => setStreetNumber(Number(e.target.value))}/>
                             <input type="text" placeholder="PSC" value={psc} onChange={(e) => setPSC(Number(e.target.value))}/>
                             <input type="text" placeholder="Mesto" value={city} onChange={(e) => setCity(e.target.value)}/>
+                            <input type="file" accept="image/*" onChange={handleFileChange} />
                             <button className='button-add-restaurant' onClick={addRestaurant}> Pridat restauraciu </button>
                         </div>
                     </div>

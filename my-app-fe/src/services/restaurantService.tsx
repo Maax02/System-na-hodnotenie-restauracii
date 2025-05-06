@@ -48,4 +48,14 @@ function addToRestaurants(name : string, kitchen: string, street: string, number
     });
 }
 
-export { getRestaurant, getRestaurantById, addToRestaurants };
+function uploadPhoto(restaurantId: number, file: File) {
+    const formData = new FormData();
+    formData.append('photo', file);
+
+    return fetch(`/api/v1/restaurants/upload/${restaurantId}`, {
+        method: 'POST',
+        body: formData,
+    });
+}
+
+export { getRestaurant, getRestaurantById, addToRestaurants, uploadPhoto };
