@@ -4,9 +4,9 @@ function NavBar() {
     return <nav className="navigation">
         <a href="/" className="title"> Systém na hodnotenie reštaurácií </a>
         <ul>
-            <li> <a href="/account"> Account </a> </li>
-            <li> <a href="/logIn"> Log in </a> </li>
-            <li> <a href="/signUp"> Sign up </a> </li>
+            <li> <a href="/account"> Účet </a> </li>
+            <li> <a href="/logIn"> Prihlásiť sa </a> </li>
+            <li> <a href="/signUp"> Registrácia </a> </li>
         </ul>
     </nav>
 }

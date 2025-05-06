@@ -183,7 +183,7 @@ function AccountCard() {
 
                 {user[0] && user[0].isadmin &&
                     <div className='AdminWork'>
-                        <p> Uprav uzivatela </p>
+                        <p> Uprav používateľa </p>
                         <form className="userForm" onSubmit={(e: any) => {e.preventDefault(); handleUserSearch();}}>
                             <input
                             type="text"
@@ -204,14 +204,14 @@ function AccountCard() {
                         <p>Email: {userSearchResult[0].email}</p>
                         <p>Admin: {userSearchResult[0].isadmin ? 'Admin' : 'Normal User'}</p>
 
-                        <button className='delUser' onClick={delUser}> Vymaz pouzivatela </button>
+                        <button className='delUser' onClick={delUser}> Vymaž používateľa </button>
                         <button className='adminUser' onClick={adminUser}> Urob adminom </button>
                     </div>
                 }
 
                 {user[0] && user[0].isadmin &&
                     <div>
-                        <p> Pridat restauraciu </p>
+                        <p> Pridať reštauráciu </p>
                         
                         <div className='restaurantForm'>
                             <input type="text" placeholder="Nazov restauracie" value={restaurantName} onChange={(e) => setRestaurantName(e.target.value)}/>
@@ -236,23 +236,23 @@ function AccountCard() {
                             <input type="text" placeholder="PSC" value={psc} onChange={(e) => setPSC(Number(e.target.value))}/>
                             <input type="text" placeholder="Mesto" value={city} onChange={(e) => setCity(e.target.value)}/>
                             <input type="file" accept="image/*" onChange={handleFileChange} />
-                            <button className='button-add-restaurant' onClick={addRestaurant}> Pridat restauraciu </button>
+                            <button className='button-add-restaurant' onClick={addRestaurant}> Pridať reštauráciu </button>
                         </div>
                     </div>
                 }
 
                 {user[0] && user[0].isadmin &&
                     <div>
-                        <p> Zmazat restauraciu </p>
+                        <p> Zmazať reštauráciu </p>
                         <form className="userForm" onSubmit={(e: any) => {e.preventDefault(); handleRestSearch();}}>
                             <input
                             type="text"
-                            placeholder="Zadajte meno restauracie..."
+                            placeholder="Zadajte meno reštaurácie..."
                             value={restSearch}
                             onChange={(e) => setRestSearch(e.target.value)}
                             />
                             <button type="submit" className="search-user-button">
-                            Hladat
+                            Hľadať
                             </button>
                         </form>
                     </div>
@@ -260,11 +260,11 @@ function AccountCard() {
 
                 {user[0] && user[0].isadmin && renderRest && restSearchResult[0] &&
                     <div className='restCard'>
-                        <p>Nazov: {restSearchResult[0].restaurant_name}</p>
-                        <p>Kuchyna: {restSearchResult[0].kuchyna}</p>
+                        <p>Názov: {restSearchResult[0].restaurant_name}</p>
+                        <p>Kuchyňa: {restSearchResult[0].kuchyna}</p>
                         <p>Adresa: {restSearchResult[0].street} {restSearchResult[0].street_number}, {restSearchResult[0].city}, {restSearchResult[0].psc}</p>
 
-                        <button className='delUser' onClick={delRest}> Vymaz restauraciu </button>
+                        <button className='delUser' onClick={delRest}> Vymaž reštauráciu </button>
                     </div>
                 }
 
@@ -279,7 +279,7 @@ function AccountCard() {
                                     <p>Správa: "{review.sprava}" </p>
                                     <p>Dátum: {new Date(review.datum).toLocaleDateString('sk-SK')} </p>
                                     <button className='delete' type='button' onClick={() => deleteReview(review.recenzia_id)}>
-                                        Delete </button>
+                                        Vymazať </button>
                                 </li>
                             ))}
                         </ul>
