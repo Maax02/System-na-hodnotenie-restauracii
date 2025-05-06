@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchUserId, getUserInfo, logout, getUserByName, userDel, makeAdmin } from '../services/logInService';
 import { getUserReviews, reviewDel } from '../services/reviewService';
-import { addToRestaurants, uploadPhoto } from '../services/restaurantService';
+import { addToRestaurants, uploadPhoto, getRestByName, restDel } from '../services/restaurantService';
 import { useNavigate } from 'react-router-dom';
 import '/src/css/account.css';
 
@@ -24,6 +24,10 @@ function AccountCard() {
     const [city, setCity] = useState<string>('')
 
     const [photo, setPhoto] = useState<File | null>(null);
+
+    const [restSearch, setRestSearch] = useState<string>('');
+    const [restSearchResult, setRestSearchResult] = useState<any>('');
+    const [renderRest, setRenderRest] = useState(false);
 
     const navigate = useNavigate();
     console.log(error)
@@ -127,6 +131,25 @@ function AccountCard() {
         }
     };
 
+
+    function handleRestSearch() {
+        getRestByName(restSearch).then((data) => {
+            setRestSearchResult(data);
+            setRenderRest(true)
+        });
+    }
+
+    const delRest = () => {
+        console.log("Delete restaurant: ", restSearchResult[0].restaurant_id)
+        restDel(restSearchResult[0].restaurant_id).then(() => {
+            navigate('/account');
+        })
+        .catch((error) => {
+            console.error("Delete failed:", error);
+            setError("Chyba pri mazani restauracie.");
+        });
+    };
+
     console.log(userSearch[0])
 
     if (loading) {
@@ -196,8 +219,34 @@ function AccountCard() {
                             <button className='button-add-restaurant' onClick={addRestaurant}> Pridat restauraciu </button>
                         </div>
                     </div>
-                    
-                } 
+                }
+
+                {user[0] && user[0].isadmin &&
+                    <div>
+                        <p> Zmazat restauraciu </p>
+                        <form className="userForm" onSubmit={(e: any) => {e.preventDefault(); handleRestSearch();}}>
+                            <input
+                            type="text"
+                            placeholder="Zadajte meno restauracie..."
+                            value={restSearch}
+                            onChange={(e) => setRestSearch(e.target.value)}
+                            />
+                            <button type="submit" className="search-user-button">
+                            Hladat
+                            </button>
+                        </form>
+                    </div>
+                }
+
+                {user[0] && user[0].isadmin && renderRest && restSearchResult[0] &&
+                    <div className='restCard'>
+                        <p>Nazov: {restSearchResult[0].restaurant_name}</p>
+                        <p>Kuchyna: {restSearchResult[0].kuchyna}</p>
+                        <p>Adresa: {restSearchResult[0].street} {restSearchResult[0].street_number}, {restSearchResult[0].city}, {restSearchResult[0].psc}</p>
+
+                        <button className='delUser' onClick={delRest}> Vymaz restauraciu </button>
+                    </div>
+                }
 
                 <div className="user-reviews">
                     <h3>Vaše recenzie:</h3>

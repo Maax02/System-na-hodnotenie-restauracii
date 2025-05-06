@@ -58,4 +58,33 @@ function uploadPhoto(restaurantId: number, file: File) {
     });
 }
 
-export { getRestaurant, getRestaurantById, addToRestaurants, uploadPhoto };
+function getRestByName(name: string) {
+    return fetch(`/api/v1/restaurants/name/${name}`).then(  // promise is resolved
+        (response) => {
+            if (!response.ok) { // HTTP status code NOT between 200-299
+                throw new Error("Error getting restaurant by name");
+            }
+            return response.json();
+        }).catch((error) => {               // promise is rejected  
+            // Better way would be to throw error here and let the 
+            // client handle (e.g. show error message)
+            // Returning empty array for simplicity only!
+            console.log("Error getting restaurant by name", error);
+            return [];
+        });
+}
+
+function restDel(rest_id: number) {
+    console.log("service: ", rest_id)
+    return fetch(`/api/v1/restaurants/delete/${rest_id}`, {
+        method: "DELETE",
+        credentials: "include",
+    }).then((response) => {
+        if (!response.ok) {
+            throw new Error("Failed to delete restaurant");
+        }
+        return response.json();
+    });
+  }
+
+export { getRestaurant, getRestaurantById, addToRestaurants, uploadPhoto, getRestByName, restDel };

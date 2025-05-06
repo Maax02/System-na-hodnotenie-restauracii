@@ -1,5 +1,5 @@
 var express = require('express'); // ESM: import
-var { getRestaurants, getRestaurantById, addToRestaurants } = require('../../models/restaurants');
+var { getRestaurants, getRestaurantById, addToRestaurants, getRestByName, deleteRest } = require('../../models/restaurants');
 const { getUserReviews } = require('../../models/reviews');
 var router = express.Router();
 
@@ -70,6 +70,32 @@ router.post('/add', function (req, res, next) {
         .catch((e) => {
             console.log(e);
             res.status(500).json({ error: 'Restauraciu sa nepodarilo pridat.' });
+        });
+});
+
+router.get('/name/:name', function (req, res, next) {
+    const name = req.params.name;
+    getRestByName(name).then(
+        (user) => {
+            res.json(user.rows);
+        }
+    ).catch(
+        (err) => {
+            console.log(err);
+            res.status(500).send("Error fetching restaurant by name");
+        }
+    );
+});
+
+router.delete('/delete/:rest_id', (req, res) => {
+    console.log("DELETE /rest/:rest_id hit with:", req.params.rest_id);
+    const rest_id = req.params.rest_id;
+    deleteRest(rest_id)
+        .then(() => res.status(200).json({ message: "Restaurant deleted" }))
+        .catch((err) => {
+            console.log(err);
+            console.log("Error in deleteRest:", err);
+            res.status(500).send("Error deleting restaurant");
         });
 });
 

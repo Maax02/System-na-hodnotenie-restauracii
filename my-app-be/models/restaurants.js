@@ -55,3 +55,20 @@ exports.addToRestaurants = function(restaurant) {
         RETURNING restaurant_id`
         , [name, street, number, city, psc, kitchen]);
 };
+
+
+exports.getRestByName = function (name) {
+    return pool.query(
+        `select restaurant_id, restaurant_name, street, street_number, city, psc, kuchyna
+         FROM restaurant
+         WHERE restaurant_name = $1`, 
+        [name]
+    );
+};
+
+exports.deleteRest = function(id) {
+    return pool.query(
+        `DELETE FROM restaurant WHERE restaurant_id = $1`,
+        [id]
+    );
+};
