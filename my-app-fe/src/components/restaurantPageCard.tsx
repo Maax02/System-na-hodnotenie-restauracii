@@ -35,7 +35,7 @@ function RestaurantPageCard() {
     //console.log(restaurant[0])
     return (
         <div className='restaurant-page-card'>
-            <img src={`/images/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />
+            <img src={`https://system-na-hodnotenie-restauracii.onrender.com/uploads/restaurantPhoto/${restaurant[0].restaurant_id}.png`} alt="rest-0" className="restaurant-page-image" />
             <h1 className='restaurant-page-name'> {restaurant[0].restaurant_name} </h1>
             <p className='restaurant-page-kitchen'> Kuchyňa: {restaurant[0].kuchyna} </p>
             <p className='restaurant-page-rating'> Hodnotenie: ⭐ {parseFloat(Number(restaurant[0].average_rating).toFixed(2))} /10 </p>
