@@ -19,7 +19,7 @@ function RestaurantCardDB({ restaurants, search }: Props) {
                     : restaurant.restaurant_name.toLowerCase().includes(searchText);
             }).map((restaurant) => (
                 <div className="cardSpace" key={restaurant.restaurant_id}>
-                    <img src={`http://localhost:3000/uploads/restaurantPhoto/${restaurant.restaurant_id}.png`} alt="rest-0" className="cardImage" />
+                    <img src={`https://system-na-hodnotenie-restauracii.onrender.com/uploads/restaurantPhoto/${restaurant.restaurant_id}.png`} alt="rest-0" className="cardImage" />
                     <h2 className="cardName">{restaurant.restaurant_name}</h2>
                     <p className="cardKitchen"> {restaurant.kuchyna} </p>
                     <p className="cardScore"> Hodnotenie: ⭐ {parseFloat(Number(restaurant.average_rating).toFixed(2))}/10 </p>
